@@ -1,0 +1,52 @@
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand h1" routerLink="/inicio"><img src=""  alt="">Cosateca</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+
+        
+        <ul class="navbar-nav ml-auto">
+          
+
+          <li *ngIf="loginService.isLogged()" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-id-card"></i></a>
+            <div class="dropdown-menu">             
+
+              <div *ngIf="loginService.isLogged()">
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click) = 'logout()'><i class="fas fa-sign-out-alt"></i>Cerrar sesión</a>
+              </div>
+
+            </div>
+          </li>
+
+          <li *ngIf="!loginService.isLogged()" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-id-card"></i></a>
+            <div class="dropdown-menu">
+              <div *ngIf="!loginService.isLogged()">
+                <a class="dropdown-item" routerLinkActive="active" routerLink="/login"><i class="fas fa-user"></i>Iniciar sesión</a>
+                <a class="dropdown-item" routerLinkActive="active" routerLink="/registro"><i class="fas fa-user-plus"></i>Registro</a>
+              </div>
+            </div>   
+          </li>
+
+
+          <!--
+          <li *ngFor="let i of breadcrumbsService.menu" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="[ i.url ]"> {{ i.titulo }} </a>
+          </li>
+          <li *ngIf="loginService.isLogged() && !loginService.esProfesor() && !loginService.esAdministrador()" class="nav-item ml-2 mr-2">
+            <div>
+             <a routerLinkActive="active" routerLink="/carrito"><img src="assets/images/smart-cart.png"  alt="Carrito" width="30px" height="30px"></a>
+            </div>
+          </li>
+          -->
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+

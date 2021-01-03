@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "cosateca"
+  "defaultProject": "cosateca",
+  "cli": {
+    "analytics": "f7cc8bab-9e0d-4f08-a1f4-56b68c7b2bf5"
+  }
 }

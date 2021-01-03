@@ -1,0 +1,64 @@
+<div class="container animated fadeInLeft">
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <form novalidate [formGroup]="form" (ngSubmit)="guardarHorario()">
+
+                <div class="form-row mb-2">
+
+                    <div class="col-4">
+                        <label>Día</label>                        
+                        <select class="form-control" formControlName="dia">
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miercoles">Miercoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                            <!--<option *ngFor="let valor of universidades" [value]="valor.nombre">{{valor.nombre}}</option>-->
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label>Hora apertura</label>
+                        <input 
+                            type="time"
+                            class="form-control" 
+                            formControlName="hora_apertura"
+                        /> 
+                    </div>
+
+                    <div class="col-4">
+                        <label>Hora cierre</label>
+                        <input 
+                            type="time"
+                            class="form-control" 
+                            formControlName="hora_cierre"
+                        />             
+                    </div>
+
+                </div>
+
+
+                
+
+                <button class="btn btn-primary mr-2" [disabled]="form.invalid">
+                    Guardar
+                </button>
+                <button class="btn btn-danger" type="button" (click) = "volver()">
+                    Cancelar
+                </button>
+
+                
+               
+                
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

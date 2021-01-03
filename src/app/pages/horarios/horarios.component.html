@@ -1,0 +1,43 @@
+<div class="container animated fadeInLeft">
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Horarios</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Día</th>
+                    <th scope="col">Hora de apertura</th>
+                    <th scope="col">Hora de cierre</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let horario of horarios">
+                    <td>{{horario.dia}}</td>
+                    <td>{{horario.hora_apertura}}</td>
+                    <td>{{horario.hora_cierre}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" [routerLink]="['editar-horario', horario.id]">Editar</button>               
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click) = "eliminarHorario(horario.id)">Eliminar</button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" [routerLink]="['nuevo-horario']">
+      Nuevo horario
+    </button>
+    
+
+</div>
