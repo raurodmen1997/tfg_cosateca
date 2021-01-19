@@ -3,8 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import {
   LoginService,
-  HorarioService
+  HorarioService,
+  UsuarioService,
+  ComunService,
+  ImagenService,
+  PeticionDonacionService,
+  DonacionesAdminService,
+  DonacionesUsuarioService
  } from './services.index';
+
 
 
 
@@ -17,7 +24,13 @@ import {
   ],
   providers: [
     LoginService,
-    HorarioService
+    HorarioService,
+    UsuarioService,
+    ComunService,
+    ImagenService,
+    PeticionDonacionService,
+    DonacionesAdminService,
+    DonacionesUsuarioService
   ],
   declarations: []
 })

@@ -23,12 +23,13 @@ export class HorarioService {
 
 
 
-  getHorarios(){
-    return this.http.get(this.urlEndPoint).pipe(
+  getHorarios(page:any){
+    return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
       map(response => response as any),
       catchError(e =>{
-        console.error(e.error.mensaje);
-        swal.fire('Error al obtener los horarios.', `${e.error.mensaje}`, 'error');
+        console.log(e);
+        console.error(e.message);
+        swal.fire('Error al obtener los horarios.', `${e.message}`, 'error');
         return throwError(e);
       })
     )

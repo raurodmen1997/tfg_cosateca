@@ -24,7 +24,7 @@
                     <td>{{horario.hora_apertura}}</td>
                     <td>{{horario.hora_cierre}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary" [routerLink]="['editar-horario', horario.id]">Editar</button>               
+                        <button type="button" class="btn btn-primary" (click) = "comunService.ir_a('editar-horario', horario.id)">Editar</button>               
                     </td>
                     <td>
                         <button type="button" class="btn btn-danger" (click) = "eliminarHorario(horario.id)">Eliminar</button>
@@ -35,8 +35,13 @@
         </div>
     </div>
 
-    <button class="btn btn-primary" [routerLink]="['nuevo-horario']">
+    <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
+
+    <button class="btn btn-primary mr-2" (click) = "comunService.ir_a('nuevo-horario', null!)">
       Nuevo horario
+    </button>
+    <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
+      Volver
     </button>
     
 

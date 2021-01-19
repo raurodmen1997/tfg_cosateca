@@ -1,0 +1,91 @@
+<div class="container animated fadeInLeft">
+
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Nueva donación</h1>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <form [formGroup]="form" (ngSubmit)="guardarDonacion()">
+
+                <div class="row">
+
+                    <div class="col-3">
+
+                        <div class="form-group">
+                            <label>Categoría</label>                        
+                            <input 
+                                type="text"
+                                class="form-control" 
+                                formControlName="categoria"
+                            /> 
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group">
+
+                            <label>Nonbre</label>
+                            <input 
+                                type="text"
+                                class="form-control" 
+                                formControlName="nombre"
+                            /> 
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-6">
+
+                        <div class="form-group">
+
+                            <label>Imagen</label>
+                            <input 
+                                type="file"
+                                formControlName="imagen"
+                                class="form-control"
+                                (change) = "establecerFile($event)"
+                            />  
+
+                        </div>
+                                   
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <div class="form-group">
+
+                            <label>Descripción</label>   
+                            <textarea class="form-control"  rows="3" formControlName="descripcion"></textarea>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <button class="btn btn-primary mr-2" [disabled]="form.invalid">
+                    Guardar
+                </button>
+                <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
+                    Cancelar
+                </button>
+  
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

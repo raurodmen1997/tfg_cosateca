@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HorarioService } from 'src/app/services/services.index';
+import { ActivatedRoute } from '@angular/router';
+import { tap } from 'rxjs/operators';
+import { ComunService, HorarioService } from 'src/app/services/services.index';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,15 +14,28 @@ export class HorariosComponent implements OnInit {
 
   public horarios:any[] = [];
 
-  constructor(private horarioService:HorarioService) { }
+  constructor(private horarioService:HorarioService, public comunService:ComunService, private activatedRoute: ActivatedRoute) { }
+
+  paginador: any;
 
   ngOnInit(){
 
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page')!;
 
-    this.horarioService.getHorarios().subscribe(horarios=>{
-      this.horarios = horarios;
-      console.log(horarios);
-    })
+      if (!page) {
+        page = 0;
+      }
+
+      this.horarioService.getHorarios(page).subscribe(response=>{
+        this.horarios = response.content;
+        this.paginador = response;
+      });
+
+    });
+
+
+    
   }
 
 

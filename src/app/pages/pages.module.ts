@@ -13,6 +13,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
 import { EditarCrearHorarioComponent } from './horarios/editar-crear-horario/editar-crear-horario.component';
+import { CrearDonacionComponent } from './donaciones/crear-donacion/crear-donacion.component';
+import { PaginatorComponent } from './componentes/paginator/paginator.component';
+import { DonacionesAdminComponent } from './donaciones/donaciones-admin/donaciones-admin.component';
+import { DonacionesUsuarioComponent } from './donaciones/donaciones-usuario/donaciones-usuario.component';
 
 
 @NgModule({
@@ -21,7 +25,11 @@ import { EditarCrearHorarioComponent } from './horarios/editar-crear-horario/edi
         LoginComponent,
         RegistroComponent,
         PagesComponent,
-        EditarCrearHorarioComponent
+        EditarCrearHorarioComponent,
+        CrearDonacionComponent,
+        PaginatorComponent,
+        DonacionesAdminComponent,
+        DonacionesUsuarioComponent
     ],
     exports: [
         CommonModule

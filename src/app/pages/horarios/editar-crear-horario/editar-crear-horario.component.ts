@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HorarioService } from 'src/app/services/services.index';
+import { ComunService, HorarioService } from 'src/app/services/services.index';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class EditarCrearHorarioComponent implements OnInit {
+export class EditarCrearHorarioComponent implements OnInit, DoCheck {
 
   form:FormGroup;
   horario_id:any = null; 
@@ -24,7 +24,8 @@ export class EditarCrearHorarioComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private horarioService: HorarioService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) { 
+    private router: Router,
+    public comunService:ComunService) { 
 
       this.form = this.fb.group({
         dia: new FormControl('', Validators.required),
@@ -34,6 +35,10 @@ export class EditarCrearHorarioComponent implements OnInit {
       
     }
 
+  ngDoCheck(){
+
+  }
+
   ngOnInit(){
 
     this.activatedRoute.paramMap.subscribe(param =>{
@@ -41,6 +46,7 @@ export class EditarCrearHorarioComponent implements OnInit {
       if(param.has('horario_id')){
         this.horario_id = parseInt(param.get("horario_id")!, 10);
         this.horarioService.getHorarioPorId(parseInt(param.get("horario_id")!, 10)).subscribe(horario=>{
+          console.log(horario);
           this.inicializarFormulario(horario);
         })
       }
@@ -92,14 +98,6 @@ export class EditarCrearHorarioComponent implements OnInit {
 
     })
 
-  }
-
-
-  /**
-   * Redirige a la pantalla de horarios.
-   */
-  volver(){
-    this.router.navigateByUrl('horarios');
   }
 
 }

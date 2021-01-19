@@ -4,7 +4,7 @@
 
         <div class="col-12">
 
-            <form novalidate [formGroup]="form" (ngSubmit)="guardarHorario()">
+            <form novalidate class="g-3 needs-validation" [formGroup]="form" (ngSubmit)="guardarHorario()">
 
                 <div class="form-row mb-2">
 
@@ -20,6 +20,13 @@
                             <option value="Domingo">Domingo</option>
                             <!--<option *ngFor="let valor of universidades" [value]="valor.nombre">{{valor.nombre}}</option>-->
                         </select>
+                        
+                        <!--
+                        <div *ngIf="form.get('dia')?.hasError('required')">
+                            Please select a valid state.
+                        </div>
+                        -->
+                        
                     </div>
 
                     <div class="col-4">
@@ -48,7 +55,7 @@
                 <button class="btn btn-primary mr-2" [disabled]="form.invalid">
                     Guardar
                 </button>
-                <button class="btn btn-danger" type="button" (click) = "volver()">
+                <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('horarios', null!)">
                     Cancelar
                 </button>
 
