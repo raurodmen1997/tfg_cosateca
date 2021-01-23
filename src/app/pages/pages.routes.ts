@@ -10,6 +10,7 @@ import { EditarCrearHorarioComponent } from './horarios/editar-crear-horario/edi
 import { CrearDonacionComponent } from './donaciones/crear-donacion/crear-donacion.component';
 import { DonacionesAdminComponent } from './donaciones/donaciones-admin/donaciones-admin.component';
 import { DonacionesUsuarioComponent } from './donaciones/donaciones-usuario/donaciones-usuario.component';
+import { ObjetosComponent } from './objetos/objetos.component';
 
 
 
@@ -33,7 +34,8 @@ const pagesRoutes: Routes = [
             { path:'editar-horario/:horario_id', component:EditarCrearHorarioComponent, data:{titulo:'Editar horario'}},
             { path:'nueva-donacion', component:CrearDonacionComponent, data:{titulo:'Nueva donación'}},
             { path:'donaciones-admin', component:DonacionesAdminComponent, data:{titulo:'Donaciones'}},
-            { path:'donaciones-usuario', component:DonacionesUsuarioComponent, data:{titulo:'Mis donaciones'}}
+            { path:'donaciones-usuario', component:DonacionesUsuarioComponent, data:{titulo:'Mis donaciones'}},
+            { path:'objetos', component:ObjetosComponent, data:{titulo:'Objetos'}}
             
 
            

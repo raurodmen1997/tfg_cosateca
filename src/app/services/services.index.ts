@@ -8,6 +8,7 @@ export { ImagenService } from './imagen/imagen.service';
 export { PeticionDonacionService } from './peticionDonacion/peticion-donacion.service';
 export { DonacionesAdminService } from './donaciones/donaciones-admin.service';
 export { DonacionesUsuarioService } from './donaciones/donaciones-usuario.service';
+export { ObjetoService } from './objeto/objeto.service';
 
 
 

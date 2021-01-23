@@ -9,7 +9,8 @@ import {
   ImagenService,
   PeticionDonacionService,
   DonacionesAdminService,
-  DonacionesUsuarioService
+  DonacionesUsuarioService,
+  ObjetoService
  } from './services.index';
 
 
@@ -30,7 +31,8 @@ import {
     ImagenService,
     PeticionDonacionService,
     DonacionesAdminService,
-    DonacionesUsuarioService
+    DonacionesUsuarioService,
+    ObjetoService
   ],
   declarations: []
 })

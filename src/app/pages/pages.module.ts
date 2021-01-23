@@ -17,6 +17,8 @@ import { CrearDonacionComponent } from './donaciones/crear-donacion/crear-donaci
 import { PaginatorComponent } from './componentes/paginator/paginator.component';
 import { DonacionesAdminComponent } from './donaciones/donaciones-admin/donaciones-admin.component';
 import { DonacionesUsuarioComponent } from './donaciones/donaciones-usuario/donaciones-usuario.component';
+import { HerramientaComponent } from './componentes/herramienta/herramienta.component';
+import { ObjetosComponent } from './objetos/objetos.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { DonacionesUsuarioComponent } from './donaciones/donaciones-usuario/dona
         CrearDonacionComponent,
         PaginatorComponent,
         DonacionesAdminComponent,
-        DonacionesUsuarioComponent
+        DonacionesUsuarioComponent,
+        HerramientaComponent,
+        ObjetosComponent
     ],
     exports: [
         CommonModule
