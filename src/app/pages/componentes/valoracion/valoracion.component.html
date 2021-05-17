@@ -1,0 +1,10 @@
+<div class="card">
+    <h6 class="card-header">{{valoracion.usuario.segundo_apellido}} {{valoracion.usuario.primer_apellido}}, {{valoracion.usuario.nombre}} - {{valoracion.fecha_creacion | date: 'dd/MM/yyyy'}} <star-rating [value]="valoracion.puntuacion" [totalstars]="5" checkedcolor="orange" uncheckedcolor="grey" size="14px" [readonly]="true"></star-rating> </h6>
+    
+    <div class="card-body">
+      <p class="card-text">
+        {{valoracion.comentario}}
+      </p>
+      
+    </div>
+  </div>

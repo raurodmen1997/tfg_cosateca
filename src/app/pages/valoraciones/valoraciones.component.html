@@ -1,0 +1,50 @@
+<div class="container animated fadeInLeft">
+
+    <div class="row mb-3">
+        <div class="col-12">
+          <h1>Valoraciones realizadas</h1>
+        </div>
+      </div>
+
+    <div *ngIf="valoraciones.length != 0" class="row">
+
+        <div class="col-12">
+
+            <div class="row" *ngFor="let valoracion of valoraciones">
+
+                <div class="col-5">
+                    <app-herramienta [objeto]="valoracion.objeto"></app-herramienta>
+                </div>
+
+                <div class="col-7">
+                   <!-- <app-valoracion [valoracion] = "valoracion"></app-valoracion>-->
+                   <div class="card">
+                    <h6 class="card-header">{{valoracion.usuario.segundo_apellido}} {{valoracion.usuario.primer_apellido}}, {{valoracion.usuario.nombre}} - {{valoracion.fecha_creacion | date: 'dd/MM/yyyy'}} <star-rating [value]="valoracion.puntuacion" [totalstars]="5" checkedcolor="orange" uncheckedcolor="grey" size="14px" [readonly]="true"></star-rating> </h6>
+                    
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{valoracion.comentario}}
+                        </p>
+                        <a [routerLink] = "['/editar-valoracion', valoracion.id]" class="btn btn-outline-primary mr-2">Editar</a>
+                        <a (click) = "eliminarValoracion(valoracion.id)" class="btn btn-outline-danger">Eliminar</a>
+                    </div>
+                  </div>
+                </div>
+
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="valoraciones.length == 0" class="row">
+        <p class="col-12">No se han realizado valoraciones hasta el momento.</p>
+    </div>
+
+    <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
+        Volver
+    </button>
+
+</div>

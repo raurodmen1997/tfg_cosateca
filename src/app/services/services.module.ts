@@ -10,7 +10,14 @@ import {
   PeticionDonacionService,
   DonacionesAdminService,
   DonacionesUsuarioService,
-  ObjetoService
+  ObjetoService,
+  ListaFavoritoService,
+  ValoracionService,
+  AuthService,
+  TokenService,
+  RoleGuard,
+  ModalService,
+  CuentaService
  } from './services.index';
 
 
@@ -32,7 +39,14 @@ import {
     PeticionDonacionService,
     DonacionesAdminService,
     DonacionesUsuarioService,
-    ObjetoService
+    ObjetoService,
+    ListaFavoritoService,
+    ValoracionService,
+    AuthService,
+    TokenService,
+    RoleGuard,
+    ModalService,
+    CuentaService
   ],
   declarations: []
 })

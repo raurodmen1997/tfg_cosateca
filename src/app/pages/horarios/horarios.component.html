@@ -27,7 +27,7 @@
                         <button type="button" class="btn btn-primary" (click) = "comunService.ir_a('editar-horario', horario.id)">Editar</button>               
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger" (click) = "eliminarHorario(horario.id)">Eliminar</button>
+                        <button type="button" class="btn btn-danger" (click) = "eliminarHorario(horario)">Eliminar</button>
                     </td>
                   </tr>
                 </tbody>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
+    <paginator-nav *ngIf="paginador" [url] = "url" [paginador]="paginador"></paginator-nav>
 
     <button class="btn btn-primary mr-2" (click) = "comunService.ir_a('nuevo-horario', null!)">
       Nuevo horario

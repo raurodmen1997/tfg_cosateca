@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ObjetoService } from 'src/app/services/services.index';
+import { ComunService, ObjetoService } from 'src/app/services/services.index';
 
 @Component({
   selector: 'app-objetos',
@@ -11,7 +11,7 @@ export class ObjetosComponent implements OnInit {
 
   objetos:any[] = [];
 
-  constructor(private objetoService:ObjetoService) { }
+  constructor(private objetoService:ObjetoService, public comunService:ComunService) { }
 
   ngOnInit(): void {
 

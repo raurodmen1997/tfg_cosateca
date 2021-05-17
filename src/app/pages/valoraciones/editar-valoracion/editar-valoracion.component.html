@@ -1,0 +1,48 @@
+<div class="container animated fadeInLeft">
+
+    <div class="row mb-3">
+        <div class="col-12">
+          <h1>Edición de valoración</h1>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+
+                    <div class="col-10">
+
+                        <div class="form-group">
+
+                            <label>Comentario</label>   
+                            <textarea class="form-control"  rows="3" formControlName="comentario"></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-2">
+                        <label>Puntuación</label> 
+                        <input class="form-control" type="number" step="any" formControlName="puntuacion">
+                    </div>
+                    
+                </div>
+
+                <button class="btn btn-primary mr-2" [disabled]="form.invalid">
+                    Guardar
+                </button>
+                <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('valoraciones', null!)">
+                    Cancelar
+                </button>
+  
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ComunService, PeticionDonacionService } from '../../../services/services.index';
+import { AuthService, ComunService, PeticionDonacionService } from '../../../services/services.index';
 import Swal from 'sweetalert2';
 import { ImagenService } from '../../../services/services.index';
 
@@ -21,31 +21,54 @@ export class CrearDonacionComponent implements OnInit {
     categoria: "",
     descripcion: "",
     nombre: "",
-    ayuntamiento: {
-        id: 1,
-        municipio: "La rinconada",
-        nombre: "Ayuntamiento de la Rinconada",
-        provincia: "Sevilla",
-        codigos_postales: [
+    imagen: {},
+    usuario: this.authService.usuario
+  }
+
+  /**
+   *  "ayuntamiento": {
+        "id": 1,
+        "municipio": "La rinconada",
+        "nombre": "Ayuntamiento de la Rinconada",
+        "provincia": "Sevilla",
+        "codigos_postales": [
             41300,
             41309
         ],
-        cuenta: {
-            id: 1,
-            nombre_perfil: "admin",
-            pass: "21232f297a57a5a743894a0e4a801fc3",
-            autoridad: "USUARIO_ADMIN"
+        "cuenta": {
+            "id": 1,
+            "nombre_perfil": "admin",
+            "pass": "21232f297a57a5a743894a0e4a801fc3",
+            "autoridad": "ROLE_ADMIN"
         },
-        direccion_email: " info@aytolarinconada.es"
+        "direccion_email": " info@aytolarinconada.es"
     },
-    imagen: {},
-    usuario: JSON.parse(localStorage.getItem('usuario')!)
-  }
+
+     "usuario": {
+        "id": 1,
+        "codigo_postal": 41300,
+        "nombre": "Raul",
+        "primer_apellido": "Rodriguez",
+        "segundo_apellido": "Mendez",
+        "telefono": "674761837",
+        "direccion_email": "raulrodriguezmendez97@gmail.com",
+        "cuenta": {
+            "id": 2,
+            "nombre_perfil": "raul",
+            "pass": "8979054b38dbd9ed52373e3fd83ce164",
+            "autoridad": "ROLE_USER"
+        },
+        "carro_compra": {},
+        "tipo_identificacion": "NIF",
+        "codigo_identificacion": "53346768Q"
+    }
+   */
 
   constructor(private fb: FormBuilder, private router: Router, 
               public comunService:ComunService, 
               private imagenService:ImagenService,
-              private peticionDonacionService:PeticionDonacionService) {
+              private peticionDonacionService:PeticionDonacionService,
+              private authService: AuthService) {
 
     this.form = this.fb.group({
       categoria: new FormControl('', Validators.required),
@@ -97,6 +120,7 @@ export class CrearDonacionComponent implements OnInit {
 
         this.peticionDonacionService.guardarPeticionDonacion(this.peticionDonacion).subscribe(resultado_peticion_donacion =>{
           Swal.fire('Operación realizada correctamente.', resultado_peticion_donacion.mensaje, 'success');
+          this.router.navigate(['/donaciones-usuario']);
         })
 
        })

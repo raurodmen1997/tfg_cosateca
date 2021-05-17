@@ -19,6 +19,15 @@ import { DonacionesAdminComponent } from './donaciones/donaciones-admin/donacion
 import { DonacionesUsuarioComponent } from './donaciones/donaciones-usuario/donaciones-usuario.component';
 import { HerramientaComponent } from './componentes/herramienta/herramienta.component';
 import { ObjetosComponent } from './objetos/objetos.component';
+import { ListaFavotiroComponent } from './lista-favotiro/lista-favotiro.component';
+import { DetalleComponent } from './objetos/detalle/detalle.component';
+import {RatingModule} from 'ng-starrating';
+import { PerfilComponent } from './perfil/perfil.component';
+import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.component';
+import { ValoracionesComponent } from './valoraciones/valoraciones.component';
+import { ValoracionComponent } from './componentes/valoracion/valoracion.component';
+import { EditarValoracionComponent } from './valoraciones/editar-valoracion/editar-valoracion.component';
+import { ObjetosListaFavoritoComponent } from './lista-favotiro/objetos-lista-favorito/objetos-lista-favorito.component';
 
 
 @NgModule({
@@ -33,7 +42,15 @@ import { ObjetosComponent } from './objetos/objetos.component';
         DonacionesAdminComponent,
         DonacionesUsuarioComponent,
         HerramientaComponent,
-        ObjetosComponent
+        ObjetosComponent,
+        ListaFavotiroComponent,
+        DetalleComponent,
+        PerfilComponent,
+        EditarPerfilComponent,
+        ValoracionesComponent,
+        ValoracionComponent,
+        EditarValoracionComponent,
+        ObjetosListaFavoritoComponent
     ],
     exports: [
         CommonModule
@@ -44,7 +61,8 @@ import { ObjetosComponent } from './objetos/objetos.component';
         SharedModule,
         ReactiveFormsModule,
         CommonModule,
-        BrowserModule
+        BrowserModule,
+        RatingModule
     ]
 })
 export class PagesModule { }

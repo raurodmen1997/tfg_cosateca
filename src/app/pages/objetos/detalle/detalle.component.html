@@ -1,0 +1,42 @@
+<div class="container animated fadeInLeft">
+  <div class="row">
+    <div class="col-12">
+      <h1>Detalle del objeto</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6">
+          <app-herramienta *ngIf="objeto" [objeto]="objeto"></app-herramienta>
+        </div>
+
+        <div class="col-6" style="overflow-y: scroll; height: 360px;">
+
+            <div class="row">
+                <div class="col-12">
+                  <h3 style="text-align: center;">Valoraciones</h3>
+                </div>
+            </div>
+
+          <div *ngFor="let valoracion of valoracionesObjeto" class="card">
+            <h6 class="card-header">{{valoracion.usuario.segundo_apellido}} {{valoracion.usuario.primer_apellido}}, {{valoracion.usuario.nombre}} - {{valoracion.fecha_creacion | date: 'dd/MM/yyyy'}} <star-rating [value]="valoracion.puntuacion" [totalstars]="5" checkedcolor="orange" uncheckedcolor="grey" size="14px" [readonly]="true"></star-rating> </h6>
+            
+            <div class="card-body">
+              <p class="card-text">
+                {{valoracion.comentario}}
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('objetos', null!)">
+    Volver
+  </button>
+
+</div>

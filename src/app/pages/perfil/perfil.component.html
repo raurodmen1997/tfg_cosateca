@@ -1,0 +1,120 @@
+<!--<div class="container animated fadeInLeft">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <fieldset class="col-8">
+          <legend>Datos personales del perfil</legend>
+
+          <div class="row">
+
+            <div class="col-6">
+              <ul class="list-group">
+                <li class="list-group-item">Nombre: {{ usuario.nombre }}</li>
+                <li class="list-group-item">
+                  Apellidos: {{ usuario.primer_apellido }}
+                  {{ usuario.segundo_apellido }}
+                </li>
+                <li class="list-group-item">
+                  Teléfono: {{ usuario.telefono }}
+                </li>
+                <li class="list-group-item">
+                  Código postal: {{ usuario.codigo_postal }}
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-6">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  Dirección de correo: {{ usuario.direccion_email }}
+                </li>
+                <li class="list-group-item">
+                  Código de identificación: {{ usuario.codigo_identificacion }}
+                </li>
+                <li class="list-group-item">
+                  Tipo de identificación: {{ usuario.tipo_identificacion }}
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+
+        </fieldset>
+
+        <fieldset class="col-4">
+          <legend>Datos de cuenta</legend>
+
+          <div class="row">
+            <div class="col-12">Nombre de usuario: {{ usuario.username }}</div>
+          </div>
+
+          <div class="row"></div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<div class="abrir-modal animacion fadeIn">
+
+  <div class="modal" tabindex="-1" style="display: block;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Datos del usuario</h5>
+          <button (click) = "cerralModal()" type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="row">
+            
+            <div class="col-7">
+              <ul class="list-group">
+                <li class="list-group-item"><strong>Nombre:</strong> {{ usuario.nombre }}</li>
+                <li class="list-group-item">
+                  <strong>Apellidos:</strong> {{ usuario.primer_apellido }}
+                  {{ usuario.segundo_apellido }}
+                </li>
+                <li class="list-group-item">
+                  <strong>Nombre de perfil:</strong> {{ usuario.username }}
+                </li>
+                <li class="list-group-item">
+                  <strong>Dirección de correo:</strong> {{ usuario.direccion_email }}
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="col-5">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <strong>Teléfono:</strong> {{ usuario.telefono }}
+                </li>
+                <li class="list-group-item">
+                  <strong>Código postal:</strong> {{ usuario.codigo_postal }}
+                </li>  
+                <li class="list-group-item">
+                  <strong>Código de identificación:</strong> {{ usuario.codigo_identificacion }}
+                </li>
+                <li class="list-group-item">
+                  <strong>Tipo de identificación:</strong> {{ usuario.tipo_identificacion }}
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button (click) = "cerralModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button (click) = "irEditarPerfil()" type="button" class="btn btn-primary">Editar perfil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

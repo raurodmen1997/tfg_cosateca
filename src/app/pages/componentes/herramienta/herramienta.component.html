@@ -1,22 +1,48 @@
-
+<!--
 <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="..." alt="...">
+        <img class="img-fluid" src="data:image/png;base64,{{objeto.imagen.bytes}}" alt="...">
       </div>
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">{{objeto.nombre}}</h5>
           <p class="card-text">{{objeto.descripcion}}</p>
           <p class="card-text"><small class="text-muted">{{objeto.categoria}}</small></p>
-          <!--<a href="#" class="btn btn-primary text-end">Go somewhere</a>-->
+          <star-rating *ngIf="valoracionMedia" [value]="valoracionMedia" [totalstars]="5" checkedcolor="orange" uncheckedcolor="grey" size="14px" [readonly]="true"></star-rating>
+         
+          <a [routerLink]="['/detalle-objeto', objeto.id]" class="card-link">Ver</a>
+          <a href="#" class="card-link">Eliminar</a>
           
         </div>
-        <!--
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Categoría: {{objeto.categoria}}</li>
-        </ul>
-        -->
       </div>
     </div>
   </div>
+
+  style="width: 18rem;"
+
+  card-link
+-->
+
+<div class="col">
+
+  <div class="card">
+    <img src="data:image/png;base64,{{objeto.imagen.bytes}}" class="card-img-top img-fluid" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">
+        {{objeto.nombre}} 
+        <button (click) = "eliminarObjetoListaFavorito(objeto)" type="button" class="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </h5>
+      <p class="card-text">{{objeto.descripcion}}</p>
+      <p class="card-text"><small class="text-muted">{{objeto.categoria}}</small></p>
+      <star-rating *ngIf="valoracionMedia" [value]="valoracionMedia" [totalstars]="5" checkedcolor="orange" uncheckedcolor="grey" size="14px" [readonly]="true"></star-rating>
+    </div>
+    <div class="card-body">
+      <a [routerLink]="['/detalle-objeto', objeto.id]" class="btn btn-outline-primary btn-block">Ver</a>
+      <a *ngIf="authService.hasRole('ROLE_ADMIN')" href="#" class="btn btn-outline-primary btn-block">Eliminar</a>
+    </div>
+  </div>
+  
+</div>

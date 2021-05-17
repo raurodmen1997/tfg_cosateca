@@ -7,26 +7,40 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
 
-        
         <ul class="navbar-nav ml-auto">
-          
 
-          <li *ngIf="loginService.isLogged()" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-id-card"></i></a>
-            <div class="dropdown-menu">             
+          <div class="btn-group open">
+            <!--<a class="btn btn-primary" href="#"><i class="icon-user"></i> User</a>-->
+            <a class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" href="#">
+              {{authService.usuario.username}}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item" (click) = "abreModalPerfil()" ><i class="fas fa-user"></i> Perfil</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="btn dropdown-item" (click) = 'logout()'><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+            </ul>
+          </div>
 
-              <div *ngIf="loginService.isLogged()">
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" (click) = 'logout()'><i class="fas fa-sign-out-alt"></i>Cerrar sesión</a>
-              </div>
+          <!--
+            routerLink="/perfil"
+            
+          <li *ngIf="authService.isAuthenticated()" class="dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{authService.usuario.username}}
+            </a>
 
-            </div>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" (click) = 'logout()'><i class="fas fa-sign-out-alt"></i>Cerrar sesión</a></li>
+            </ul>
           </li>
+          -->
 
-          <li *ngIf="!loginService.isLogged()" class="nav-item dropdown">
+          <li *ngIf="!authService.isAuthenticated()" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-id-card"></i></a>
             <div class="dropdown-menu">
-              <div *ngIf="!loginService.isLogged()">
+              <div *ngIf="!authService.isAuthenticated()">
                 <a class="dropdown-item" routerLinkActive="active" routerLink="/login"><i class="fas fa-user"></i>Iniciar sesión</a>
                 <a class="dropdown-item" routerLinkActive="active" routerLink="/registro"><i class="fas fa-user-plus"></i>Registro</a>
               </div>
@@ -49,4 +63,6 @@
       </div>
     </div>
   </nav>
+
+
 

@@ -1,0 +1,173 @@
+<div class="container animated fadeInLeft">
+  <div class="row mb-3">
+    <div class="col-12">
+      <h2>Editar datos del usuario</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" id="form">
+        <div class="row">
+          <div class="col-2">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input
+                type="text"
+                placeholder="Introduzca su nombre"
+                class="form-control"
+                formControlName="nombre"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label>Nombre de usuario</label>
+              <input
+                type="text"
+                placeholder="Introduzca su usuario"
+                class="form-control"
+                formControlName="nombre_perfil"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label>Primer apellido</label>
+              <input
+                type="text"
+                placeholder="Introduzca su primer apellido"
+                class="form-control"
+                formControlName="primer_apellido"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label>Segundo apellido</label>
+              <input
+                type="text"
+                placeholder="Introduzca su segundo apellido"
+                class="form-control"
+                formControlName="segundo_apellido"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label>Código postal</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="codigo_postal"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="form-group">
+              <label>Tipo identificación</label>
+              <select
+                class="form-control"
+                formControlName="tipo_identificacion"
+              >
+                <option value="NIF">NIF</option>
+                <option value="NIE">NIE</option>
+                <!--<option *ngFor="let valor of universidades" [value]="valor.nombre">{{valor.nombre}}</option>-->
+              </select>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="form-group">
+              <label>Código identificación</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="codigo_identificacion"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label>Teléfono</label>
+              <input
+                type="text"
+                placeholder="Introduzca su teléfono"
+                class="form-control"
+                formControlName="telefono"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="text"
+                placeholder="Introduzca su email"
+                class="form-control"
+                formControlName="direccion_email"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!--
+          <div class="col-4">
+            <div class="form-group">
+              <label>Contraseña</label>
+              <input
+                type="password"
+                placeholder="Introduzca su contraseña"
+                class="form-control"
+                formControlName="pass"
+              />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label>Confirmar contraseña</label>
+              <input
+                type="password"
+                placeholder="Repita su contraseña"
+                class="form-control"
+                formControlName="confirmPass"
+              />
+            </div>
+          </div>
+          -->
+
+        <!--
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                       
+                                        <div class="col-12 col-md-6">
+                                            <div class="custom-control custom-checkbox my-1 mr-sm-2 form-group">            
+                                                <input formControlName="check" type="checkbox" class="custom-control-input" id="customControlInline">
+                                                <label class="custom-control-label" for="customControlInline">Aceptar <a routerLink="/terminos-y-condiciones">términos y condiciones</a> y <a routerLink="/politica-privacidad">política de privacidad.</a></label>    
+                                            </div>
+                                        </div>
+                                        
+        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            -->
+
+        <button class="btn btn-primary mr-2" [disabled]="form.invalid">
+          Guardar
+        </button>
+        <button
+          class="btn btn-danger"
+          type="button"
+          (click)="comunService.ir_a('inicio', null!)"
+        >
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

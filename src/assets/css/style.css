@@ -703,11 +703,14 @@ dropdown-item
 /*******************
 Layouts
 ******************/
+
+/*
 .card-no-border .card {
   border: 0px;
   border-radius: 0px;
   -webkit-box-shadow: none;
   box-shadow: none; }
+  */
 
 .card-no-border .shadow-none {
   -webkit-box-shadow: none;

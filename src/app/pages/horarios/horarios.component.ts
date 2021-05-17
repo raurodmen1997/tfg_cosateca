@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { ComunService, HorarioService } from 'src/app/services/services.index';
 import Swal from 'sweetalert2';
@@ -13,10 +13,12 @@ import Swal from 'sweetalert2';
 export class HorariosComponent implements OnInit {
 
   public horarios:any[] = [];
+  
 
-  constructor(private horarioService:HorarioService, public comunService:ComunService, private activatedRoute: ActivatedRoute) { }
+  constructor(private horarioService:HorarioService, private router:Router, public comunService:ComunService, private activatedRoute: ActivatedRoute) { }
 
   paginador: any;
+  url:any;
 
   ngOnInit(){
 
@@ -28,8 +30,15 @@ export class HorariosComponent implements OnInit {
       }
 
       this.horarioService.getHorarios(page).subscribe(response=>{
-        this.horarios = response.content;
-        this.paginador = response;
+        console.log(response);
+        if(page >= response.totalPages){
+          this.router.navigate(['/horarios']);
+        }else{
+          this.horarios = response.content;
+          this.paginador = response;
+          this.url = '/horarios/page';
+        }
+        
       });
 
     });
@@ -44,10 +53,10 @@ export class HorariosComponent implements OnInit {
    * Elimina el horario cuyo identificador es el pasado por parámetro
    * @param horario_id Identificador del horario a eliminar
    */
-  eliminarHorario(horario_id:number){
+  eliminarHorario(horario:any){
 
     Swal.fire({
-      title: '¿Está seguro de querer eliminar el horario?',
+      title: `¿Está seguro de querer eliminar el horario '${horario.dia} de  ${horario.hora_apertura} a ${horario.hora_cierre}'?`,
       showCancelButton: true,
       confirmButtonText: `Eliminar`,
       cancelButtonColor: '#d33',
@@ -56,8 +65,8 @@ export class HorariosComponent implements OnInit {
 
       if(result.isConfirmed){
 
-        this.horarioService.deleteHorario(horario_id).subscribe(result=>{
-          this.horarios = this.horarios.filter(hor => hor.id !== horario_id);
+        this.horarioService.deleteHorario(horario.id).subscribe(result=>{
+          this.horarios = this.horarios.filter(hor => hor.id !== horario.id);
           Swal.fire('Operación realizada correctamente.', result.mensaje, 'success');
         })
       }

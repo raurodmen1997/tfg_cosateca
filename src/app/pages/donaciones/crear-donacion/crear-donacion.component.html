@@ -52,6 +52,7 @@
                                 formControlName="imagen"
                                 class="form-control"
                                 (change) = "establecerFile($event)"
+                                accept=".png,.jpg,.jpeg"
                             />  
 
                         </div>
@@ -78,7 +79,7 @@
                 <button class="btn btn-primary mr-2" [disabled]="form.invalid">
                     Guardar
                 </button>
-                <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
+                <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('donaciones-usuario', null!)">
                     Cancelar
                 </button>
   

@@ -34,4 +34,16 @@ export class ObjetoService {
     }
 
 
+    getObjetoPorId(objeto_id: number){
+      return this.http.get(`${this.urlEndPoint}/${objeto_id}`).pipe(
+        map(response => response as any),
+        catchError(e =>{
+          console.error(e.error.mensaje);
+          swal.fire('Error al obtener el objeto.', `${e.error.mensaje}`, 'error');
+          return throwError(e);
+        })
+      )
+    }
+
+
 }

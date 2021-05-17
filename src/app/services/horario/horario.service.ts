@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import swal from 'sweetalert2';
+import { TokenService } from '../token/token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +18,19 @@ export class HorarioService {
   });
 
   constructor(private http: HttpClient,
-    private router:Router) { }
-
-
+    private router:Router, private tokenService:TokenService) { }
 
 
 
   getHorarios(page:any){
-    return this.http.get(`${this.urlEndPoint}/page/${page}`).pipe(
+    return this.http.get(`${this.urlEndPoint}/page/${page}`, {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
       map(response => response as any),
       catchError(e =>{
+
+        if (this.tokenService.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
         console.log(e);
         console.error(e.message);
         swal.fire('Error al obtener los horarios.', `${e.message}`, 'error');
@@ -38,10 +42,16 @@ export class HorarioService {
 
 
   getHorarioPorId(idHorario: number){
-    return this.http.get(`${this.urlEndPoint}/${idHorario}`).pipe(
+    return this.http.get(`${this.urlEndPoint}/${idHorario}`, {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
       map(response => response as any),
       catchError(e =>{
+
+        if (this.tokenService.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
         console.error(e.error.mensaje);
+        this.router.navigate(['/horarios']);
         swal.fire('Error al obtener el horario.', `${e.error.mensaje}`, 'error');
         return throwError(e);
       })
@@ -51,9 +61,14 @@ export class HorarioService {
 
   deleteHorario(horarioId: number){
     //return this.http.delete(`${this.urlEndPoint}/${horarioId}?username=${JSON.parse(localStorage.getItem('usuario')).userAccount.username}`).pipe(
-    return this.http.delete(`${this.urlEndPoint}/${horarioId}`).pipe(
+    return this.http.delete(`${this.urlEndPoint}/${horarioId}`, {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
       map(response => response as any),
       catchError(e =>{
+
+        if (this.tokenService.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
         console.error(e.error.mensaje);
         swal.fire('Error al intentar eliminar un horario.', `${e.error.mensaje}`, 'error');
         return throwError(e);
@@ -69,9 +84,14 @@ export class HorarioService {
 
     if(horario_id !== null){
       url = `${this.urlEndPoint}/${horario_id}`
-      result = this.http.put(url, horario).pipe(
+      result = this.http.put(url, horario, {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
         map(response => response as any),
         catchError(e =>{
+
+          if (this.tokenService.isNoAutorizado(e)) {
+            return throwError(e);
+          }
+
           console.error(e.error.error);
           swal.fire('Error al editar un horario.', `${e.error.mensaje}`, 'error');
           return throwError(e);
@@ -79,9 +99,14 @@ export class HorarioService {
       );
     }else{
       url = `${this.urlEndPoint}`
-      result = this.http.post(url, horario, {headers: this.httpHeaders}).pipe(
+      result = this.http.post(url, horario, {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
         map(response => response as any),
         catchError(e =>{
+
+          if (this.tokenService.isNoAutorizado(e)) {
+            return throwError(e);
+          }
+          
           console.error(e.error.message);
           swal.fire('Error al crear un horario.', `${e.error.mensaje}`, 'error');
           return throwError(e);

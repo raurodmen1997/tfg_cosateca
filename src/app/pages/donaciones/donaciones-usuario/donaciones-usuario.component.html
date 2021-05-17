@@ -1,1 +1,48 @@
-<p>donaciones-usuario works!</p>
+<div class="container animated fadeInLeft">
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Peticiones de donación</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let peticion of peticionesDonacion">
+                    <td>{{peticion.nombre}}</td>
+                    <td>{{peticion.descripcion}}</td>
+                    <td>{{peticion.categoria}}</td>
+                    <td>{{peticion.fecha_creacion | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{peticion.estado}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click) = "verImagen(peticion)">Ver imagen</button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <paginator-nav *ngIf="paginador" [url] = "url" [paginador]="paginador"></paginator-nav>
+
+    <button class="btn btn-primary mr-2" (click) = "comunService.ir_a('nueva-donacion', null!)">
+      Nueva petición
+    </button>
+    <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
+      Volver
+    </button>
+    
+
+</div>

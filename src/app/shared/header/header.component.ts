@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
-  LoginService
+  AuthService,
+  LoginService,
+  ModalService
 } from '../../services/services.index';
 
 @Component({
@@ -13,17 +15,21 @@ import {
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public loginService:LoginService, private route:Router) { }
+  constructor(public authService:AuthService, private route:Router, private modalService:ModalService) { }
+
 
   ngOnInit(): void {
   }
 
 
   logout(){
-    localStorage.removeItem('usuario');
-    //this.breadcrumbsService.usuario = null;
+    this.authService.logout();
     this.route.navigate(['/login']);
-
   }
 
+
+
+  abreModalPerfil(){
+    this.modalService.abreModalPerfil = true;
+  }
 }

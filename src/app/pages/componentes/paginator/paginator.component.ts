@@ -9,6 +9,7 @@ import { Component, Input, OnInit, SimpleChanges, OnChanges } from '@angular/cor
 export class PaginatorComponent implements OnInit, OnChanges {
 
   @Input() paginador: any;
+  @Input() url: any;
 
   paginas: any;
 
