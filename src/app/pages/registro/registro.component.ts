@@ -26,7 +26,6 @@ export class RegistroComponent implements OnInit {
         pass: "",
         autoridad: "USUARIO_CLIENTE"
     },
-    carro_compra: {},
     tipo_identificacion: "",
     codigo_identificacion: ""
 }
@@ -64,22 +63,31 @@ export class RegistroComponent implements OnInit {
     }).then((result) => {
 
       if(result.isConfirmed){
-        this.usuario_nuevo.codigo_postal = this.form.get('codigo_postal')?.value;
-        this.usuario_nuevo.nombre = this.form.get('nombre')?.value;
-        this.usuario_nuevo.primer_apellido = this.form.get('primer_apellido')?.value;
-        this.usuario_nuevo.segundo_apellido = this.form.get('segundo_apellido')?.value;
-        this.usuario_nuevo.tipo_identificacion = this.form.get('tipo_identificacion')?.value;
-        this.usuario_nuevo.codigo_identificacion = this.form.get('codigo_identificacion')?.value;
-        this.usuario_nuevo.telefono = this.form.get('telefono')?.value;
-        this.usuario_nuevo.direccion_email = this.form.get('direccion_email')?.value;
-        this.usuario_nuevo.cuenta.nombre_perfil = this.form.get('nombre_perfil')?.value;
-        this.usuario_nuevo.cuenta.pass = this.form.get('pass')?.value;
+        let usuario_nuevo:any = {};
+        let cuenta: any = {};
         
-        this.usuarioService.guardarUsuario(this.usuario_nuevo).subscribe(resultado=>{
+        usuario_nuevo["codigo_postal"] = this.form.get('codigo_postal')?.value;
+        usuario_nuevo["nombre"] = this.form.get('nombre')?.value;
+        usuario_nuevo["primer_apellido"] = this.form.get('primer_apellido')?.value;
+        usuario_nuevo["segundo_apellido"] = this.form.get('segundo_apellido')?.value;
+        usuario_nuevo["tipo_identificacion"] = this.form.get('tipo_identificacion')?.value;
+        usuario_nuevo["codigo_identificacion"] = this.form.get('codigo_identificacion')?.value;
+        usuario_nuevo["telefono"] = this.form.get('telefono')?.value;
+        usuario_nuevo["direccion_email"] = this.form.get('direccion_email')?.value;
+        cuenta["nombre_perfil"] = this.form.get('nombre_perfil')?.value;
+        cuenta["pass"] = this.form.get('pass')?.value;
+        cuenta["autoridad"] = "ROLE_USER";
+        usuario_nuevo["cuenta"] = cuenta;
+
+        console.log(usuario_nuevo);
+        
+        
+        this.usuarioService.guardarUsuario(usuario_nuevo).subscribe(resultado=>{
           console.log(resultado);
           Swal.fire('Operación realizada correctamente.', resultado.mensaje, 'success');
           this.route.navigateByUrl('login');
-        })
+        });
+        
       }
     })
 

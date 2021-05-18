@@ -52,8 +52,7 @@ const pagesRoutes: Routes = [
             { path:'listas-favorito', component:ListaFavotiroComponent, canActivate: [RoleGuard], data:{titulo:'Listas favorito', role: 'ROLE_USER'}},
             { path:'objetos-lista-favorito/:lista_id', component:ObjetosListaFavoritoComponent, canActivate: [RoleGuard], data:{titulo:'Objetos en lista favorito', role: 'ROLE_USER'}},
 
-            { path:'objetos', component:ObjetosComponent, data:{titulo:'Objetos'}},
-            
+            { path:'objetos', component:ObjetosComponent, data:{titulo:'Objetos'}}, 
             { path:'detalle-objeto/:objeto_id', component:DetalleComponent, data:{titulo:'Detalle objeto'}},
 
             { path:'perfil', component:PerfilComponent, data:{titulo:'Perfil'}},
