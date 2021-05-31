@@ -38,4 +38,23 @@ export class CuentaService {
     }
 
 
+    actualizarCuenta(cuenta: any, cuenta_id:number){
+
+      return this.http.put(`${this.urlEndPoint}/${cuenta_id}`, cuenta, {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
+          map(response => response as any),
+          catchError(e =>{
+  
+            if (this.tokenService.isNoAutorizado(e)) {
+              return throwError(e);
+            }
+  
+            console.error(e.error.error);
+            swal.fire('Error al actualizar la cuenta.', `${e.error.mensaje}`, 'error');
+            return throwError(e);
+          })
+        );
+  
+    }
+
+
 }

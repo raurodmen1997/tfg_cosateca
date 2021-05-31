@@ -31,17 +31,29 @@
     <div class="card-body">
       <h5 class="card-title">
         {{objeto.nombre}} 
-        <button (click) = "eliminarObjetoListaFavorito(objeto)" type="button" class="close">
+        <button *ngIf="authService.hasRole('ROLE_USER') && pagina == 'objetos-lista-favorito'" (click) = "eliminarObjetoListaFavorito(objeto)" type="button" class="close">
           <span aria-hidden="true">&times;</span>
         </button>
+
+        
+        <!--
+        <button type="button" class="close">
+          <span aria-hidden="true">&hearts;</span>
+        </button>
+        
+      <button type="button" class="btn">
+          <i class="far fa-heart"></i>
+        </button>
+      -->
       </h5>
       <p class="card-text">{{objeto.descripcion}}</p>
       <p class="card-text"><small class="text-muted">{{objeto.categoria}}</small></p>
       <star-rating *ngIf="valoracionMedia" [value]="valoracionMedia" [totalstars]="5" checkedcolor="orange" uncheckedcolor="grey" size="14px" [readonly]="true"></star-rating>
     </div>
     <div class="card-body">
-      <a [routerLink]="['/detalle-objeto', objeto.id]" class="btn btn-outline-primary btn-block">Ver</a>
+      <a *ngIf="pagina != 'detalle-objeto'" [routerLink]="['/detalle-objeto', objeto.id]" class="btn btn-outline-primary btn-block">Ver</a>
       <a *ngIf="authService.hasRole('ROLE_ADMIN')" href="#" class="btn btn-outline-primary btn-block">Eliminar</a>
+      <a *ngIf="authService.hasRole('ROLE_USER') && (pagina == 'objetos' || pagina == 'detalle-objeto')" (click) = "anadirA(objeto.id)" class="btn btn-outline-primary btn-block">Añadir a</a>
     </div>
   </div>
   

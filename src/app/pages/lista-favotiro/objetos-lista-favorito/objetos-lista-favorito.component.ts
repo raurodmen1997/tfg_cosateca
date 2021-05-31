@@ -13,6 +13,7 @@ import swal from 'sweetalert2';
 export class ObjetosListaFavoritoComponent implements OnInit {
 
   listaFavorito:any;
+  paginaActual:string = "objetos-lista-favorito";
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,

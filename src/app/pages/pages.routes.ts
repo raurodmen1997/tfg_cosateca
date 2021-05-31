@@ -19,6 +19,9 @@ import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.comp
 import { ValoracionesComponent } from './valoraciones/valoraciones.component';
 import { EditarValoracionComponent } from './valoraciones/editar-valoracion/editar-valoracion.component';
 import { ObjetosListaFavoritoComponent } from './lista-favotiro/objetos-lista-favorito/objetos-lista-favorito.component';
+import { ReservasUsuarioComponent } from './reservas/reservas-usuario/reservas-usuario.component';
+import { ReservasAdminComponent } from './reservas/reservas-admin/reservas-admin.component';
+import { UsuariosOlvidadosComponent } from './usuarios-olvidados/usuarios-olvidados.component';
 
 
 
@@ -59,10 +62,14 @@ const pagesRoutes: Routes = [
             { path:'editar-perfil', component:EditarPerfilComponent, data:{titulo:'Editar perfil'}},
 
             { path:'valoraciones', component:ValoracionesComponent, canActivate: [RoleGuard], data:{titulo:'Mis valoraciones',  role: 'ROLE_USER'}},
-            { path:'editar-valoracion/:valoracion_id', component:EditarValoracionComponent, canActivate: [RoleGuard], data:{titulo:'Editar valoración',  role: 'ROLE_USER'}}
+            { path:'editar-valoracion/:valoracion_id', component:EditarValoracionComponent, canActivate: [RoleGuard], data:{titulo:'Editar valoración',  role: 'ROLE_USER'}},
            
-            
-            
+            { path:'reservas-usuario', component:ReservasUsuarioComponent, canActivate: [RoleGuard], data:{titulo:'Mis peticiones de reserva',  role: 'ROLE_USER'}},
+
+            { path:'reservas-admin', component:ReservasAdminComponent, canActivate: [RoleGuard], data:{titulo:'Reservas',  role: 'ROLE_ADMIN'}},
+
+            { path:'usuarios-olvidados', component:UsuariosOlvidadosComponent, canActivate: [RoleGuard], data:{titulo:'Usuarios olvidados',  role: 'ROLE_ADMIN'}},
+            { path:'usuarios-olvidados/page/:page', component: UsuariosOlvidadosComponent, canActivate: [RoleGuard], data:{titulo:'Usuarios olvidados', role: 'ROLE_ADMIN'}},
 
            
         ]

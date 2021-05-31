@@ -1,61 +1,89 @@
-  <!-- Page Content -->
-  <div class="container animated fadeInLeft">
 
-    <h1 class="my-4">Te saluda tu amiga y aliada <b>ProSubject</b></h1>
+<div *ngIf="infoAyuntamiento" class="container animated fadeInLeft">
 
-    <!-- Marketing Icons Section -->
-    <div class="row text-center">
+
+    <h1 class="my-4">La cosateca, donde compartir es vivir.</h1>
+
+
+    <div class="row">
       <div class="col-lg-4 mb-4">
         <div class="card h-100">
-          <h4 class="card-header">Aprende</h4>
+          <h4 class="card-header text-center">Sobre nosotros</h4>
           <div class="card-body">
-            <img class="img-fluid rounded" src="https://www.compartirpalabramaestra.org/sites/default/files/desde-pequeno-me-ha-gustado-aprender.jpg" alt="Enseñar" height="150" width="300">
-            <p class="card-text mt-3">Cuando enseñar es un arte, aprender es un placer.</p>
+            <img class="img-fluid rounded" src="../../../assets/images/quienes_somos.jpg" alt="Enseñar" height="150" width="300">
+            <p class="card-text mt-3 text-justify">Es una iniciativa que surge para fomentar el uso adecuado y responsable de objetos, en este caso sobre las heramientas domesticas. Cualquier persona que forme parte de esta iniciativa, podrá compartir sus herramientas mediante la realización de donaciones. Además, podra realizar peticiones de reserva de las herramientas disponibles de la cosateca.</p>
           </div>
         </div>
       </div>
       <div class="col-lg-4 mb-4">
         <div class="card h-100">
-          <h4 class="card-header">Enseña</h4>
+          <h4 class="card-header text-center">Contáctanos</h4>
           <div class="card-body">
-            <img class="img-fluid rounded" src="https://imagenes.universia.net/gc/net/images/educacion/-/-c/-co/-consejos-aprender-a-ensenar.jpg" alt="Enseñar" height="150" width="300">
-            <p class="card-text mt-3">Si quieres aprender, enseña.</p>
+            <img class="img-fluid rounded" src="../../../assets/images/contactanos.png" alt="Enseñar" height="150" width="300">
+            <p class="card-text mt-3 text-justify">Nos encontramos en <strong>{{infoAyuntamiento.direccion}}</strong> en el municipio de <strong>{{infoAyuntamiento.municipio}}</strong> ({{codigos_postales}}), dentro de la provincia de <strong>{{infoAyuntamiento.provincia}}</strong>. Para cualquier duda, pregunta o sugerencia, puede contactarnos mediante los siguientes medios:</p>
+            <ul>
+              <li><i class="fas fa-envelope mr-1"></i> {{infoAyuntamiento.direccion_correo}}</li>
+              <li><i class="fas fa-phone-alt mr-1"></i> {{infoAyuntamiento.telefono}}</li>
+            </ul>
           </div>
         </div>
       </div>
       <div class="col-lg-4 mb-4">
         <div class="card h-100">
-          <h4 class="card-header">Obtén tu beneficio</h4>
+          <h4 class="card-header text-center">Objetivos</h4>
           <div class="card-body">
-            <img class="img-fluid rounded" src="https://dalealaweb.com/wp-content/uploads/2014/05/Como-mostrar-jefe-cliente-beneficios-ventajas-redes-sociales-PB-1.png" alt="Enseñar" height="150" width="300">
-            <p class="card-text mt-3">Todos ganamos enseñes o aprendas, obtienes un beneficio.</p>
+            <img class="img-fluid rounded" src="../../../assets/images/objetivos.jpg" alt="Objetivos" height="150" width="300">
+            <p class="card-text mt-3 text-justify">Uno de los objetivos por los que surge esta idea altruista es la de crear una sociedad más unida y responsable con el medio ambiente. Si una heramienta deja de tener uso para alguien, otra puede necesitarla para cualquier fin, por lo que alargamos la vida útil de cualquier herramienta y, así, fomentamos que haya un sociedad en la que se comparta más.
+            </p>
           </div>
         </div>
       </div>
     </div>
-    <!-- /.row -->
 
-    <!-- Features Section -->
+
     <div class="row">
       <div class="col-lg-6">
-        <h2>ProSubject</h2>
-        <p>La aplicación para estudiantes más sofisticada y útil del mercado:</p>
-        <ul>
-          <li>
-            <strong>Ganas y ganas</strong>
-          </li>
-          <li>Aprendes</li>
-          <li>Ayudas</li>
-          <li>Obtienes dinero o aprobados</li>
-          <li>Te relacionas</li>
+        <h2>Horarios</h2>
+        <p>Los horarios pueden estar sujetos a cambios. <a *ngIf="authService.hasRole('ROLE_ADMIN')" [routerLink] = "['/horarios']" class="link-primary">Gestionar horarios</a></p>
+        <ul class="list-group">
+          <li *ngFor="let horario of infoAyuntamiento.horarios" class="list-group-item">{{horario}}</li>
         </ul>
-        <p>¿Por qué usarla? Porque hagas lo que hagas sales beneficiado.</p>
       </div>
       <div class="col-lg-6">
-        <img class="img-fluid rounded" src="assets/images/Inicio.PNG" alt="Inicio">
+        <!--<img class="img-fluid rounded" src="assets/images/Inicio.PNG" alt="Inicio">-->
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100" src="../../../assets/images/ayuntamiento.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="../../../assets/images/ayuntamiento2.jpg" alt="Second slide">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- /.row -->
+
+
+
+<!--
+  <div class="row">
+
+    <div class="col-12">
+
+      <div class="row">
+
+        <div class="col-6">
+        </div>
+
+        <div class="col-6">
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
-  <!-- /.container -->
+  -->
+
+</div>

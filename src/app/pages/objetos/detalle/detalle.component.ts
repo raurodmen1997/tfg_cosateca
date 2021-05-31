@@ -17,6 +17,8 @@ export class DetalleComponent implements OnInit {
   totalStars:number = 5;
   readOnly:boolean = false;
 
+  pagina:string = "detalle-objeto";
+
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private objetoService:ObjetoService,

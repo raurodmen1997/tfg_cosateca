@@ -122,5 +122,49 @@ export class EditarPerfilComponent implements OnInit {
     });
   }
 
+
+  /**
+   * Actualiza la contraseña del usuario autenticado.
+   */
+  cambiarPass(){
+
+    swal.fire({
+      title: 'Cambiar contraseña.',
+      html:
+    '<input id="swal-input1" placeholder="Contraseña" class="swal2-input">' +
+    '<input id="swal-input2" placeholder="Repita contraseña" class="swal2-input">',
+      showCancelButton: true,
+      confirmButtonText: `Guardar`,
+      cancelButtonColor: '#d33',
+      icon: 'warning',       
+      preConfirm: () => {
+
+        if((<HTMLInputElement>document.getElementById('swal-input1')).value === '' && (<HTMLInputElement>document.getElementById('swal-input2')).value === ''){
+          Swal.showValidationMessage("Debe establecer un valor.")
+        }
+        if((<HTMLInputElement>document.getElementById('swal-input1')).value !== (<HTMLInputElement>document.getElementById('swal-input2')).value){
+          Swal.showValidationMessage("Los valores de las contraseñas son distintas.")
+        }
+
+      }
+      
+    }).then((result) => {
+
+      if(result.isConfirmed){
+
+        let cuenta:any = {
+          nombre_perfil: this.authService.usuario.username,
+          pass:btoa((<HTMLInputElement>document.getElementById('swal-input1')).value)
+        };
+
+        this.cuentaService.actualizarCuenta(cuenta, this.authService.usuario.id_cuenta).subscribe(resultado=>{
+          swal.fire('Operación realizada correctamente.',resultado.mensaje,'success');
+        });
+      }
+
+    });
+
+  }
+
   
 }

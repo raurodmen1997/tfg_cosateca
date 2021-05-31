@@ -49,5 +49,59 @@ export class UsuarioService {
       })
     );
   }
+
+
+  getUsuariosOlvidados(page:any){
+    return this.http.get(`${this.urlEndPoint}/olvidados/page/${page}`, {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
+      map(response => response as any),
+      catchError(e =>{
+
+        if (this.tokenService.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
+        console.log(e);
+        console.error(e.message);
+        swal.fire('Error al obtener los usuarios a ser olvidados.', `${e.message}`, 'error');
+        return throwError(e);
+      })
+    )
+  
+  }
+
+
+
+  deleteUsuario(usuario_id: number){
+    //return this.http.delete(`${this.urlEndPoint}/${horarioId}?username=${JSON.parse(localStorage.getItem('usuario')).userAccount.username}`).pipe(
+    return this.http.delete(`${this.urlEndPoint}/${usuario_id}`, {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
+      map(response => response as any),
+      catchError(e =>{
+
+        if (this.tokenService.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
+        console.error(e.error.mensaje);
+        swal.fire('Error al intentar eliminar el usuario.', `${e.error.mensaje}`, 'error');
+        return throwError(e);
+      })
+    );
+  }
+
+  realizarPeticiónOlvido(usuario_id: number){
+    return this.http.put(`${this.urlEndPoint}/peticionOlvido/${usuario_id}`, null, {headers: this.tokenService.agregarAutorizacionToken()}).pipe(
+      map(response => response as any),
+      catchError(e =>{
+
+        if (this.tokenService.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
+        console.error(e.error.error);
+        swal.fire('Error al realizar la petición de olvido.', `${e.error.mensaje}`, 'error');
+        return throwError(e);
+      })
+    );
+  }
    
 }

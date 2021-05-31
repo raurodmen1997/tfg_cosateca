@@ -16,6 +16,8 @@ export { TokenService } from './token/token.service';
 export { RoleGuard } from './guards/role.guard';
 export { ModalService } from './modal/modal.service';
 export { CuentaService } from './cuenta/cuenta.service';
+export { MailService } from './mail/mail.service';
+export { AyuntamientoService } from './ayuntamiento/ayuntamiento.service';
 
 
 

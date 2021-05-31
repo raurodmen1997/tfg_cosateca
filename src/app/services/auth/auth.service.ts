@@ -63,12 +63,14 @@ export class AuthService {
     this._usuario.segundo_apellido = payload?.segundo_apellido;
     this._usuario.username = payload.user_name;
     this._usuario.telefono = payload?.telefono;
-    this._usuario.direccion_email = payload.direccion_email;
+    this._usuario.direccion_email = payload?.direccion_email;
+    this._usuario.direccion = payload?.direccion;
     this._usuario.id = payload.id;
     this._usuario.roles = payload.authorities[0];
     this._usuario.codigo_postal = payload.codigo_postal;
     this._usuario.codigo_identificacion = payload.codigo_identificacion;
     this._usuario.tipo_identificacion = payload.tipo_identificacion;
+    this._usuario.olvidado = payload?.olvidado;
     this._usuario.id_cuenta = payload.id_cuenta;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
@@ -80,12 +82,14 @@ export class AuthService {
     this._usuario.segundo_apellido = usuario?.segundo_apellido;
     this._usuario.username = usuario.cuenta.nombre_perfil;
     this._usuario.telefono = usuario?.telefono;
-    this._usuario.direccion_email = usuario.direccion_email;
+    this._usuario.direccion_email = usuario?.direccion_email;
+    this._usuario.direccion = usuario?.direcion;
     this._usuario.id = usuario.id;
     this._usuario.roles = usuario.cuenta.autoridad;
     this._usuario.codigo_postal = usuario.codigo_postal;
     this._usuario.codigo_identificacion = usuario.codigo_identificacion;
     this._usuario.tipo_identificacion = usuario.tipo_identificacion;
+    this._usuario.olvidado = usuario?.olvidado;
     this._usuario.id_cuenta = usuario.cuenta.id;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }

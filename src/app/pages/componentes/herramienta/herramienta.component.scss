@@ -1,0 +1,34 @@
+/*
+.like{
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+
+    width: 50px;
+    height: 50px;
+    background-image: url('../../../../assets/corazon.png');
+    outline: 0;
+    background-size: 1450px50px;
+  }
+  .like.is-liked{
+    animation-name: like;
+    animation-duration: .8s;
+    animation-timing-function: steps(28);
+    animation-fill-mode: forwards;
+  }
+  @keyframes like {
+    0%{
+     background-position: 00;
+    }
+    100%{
+
+      background-position: right;
+    }
+  }
+  */
+  a:not([href]):not([tabindex]):hover {
+    color: white;
+}
+a:not([href]):not([tabindex]) {
+  color: #007bff;
+}

@@ -17,7 +17,9 @@ import {
   TokenService,
   RoleGuard,
   ModalService,
-  CuentaService
+  CuentaService,
+  MailService,
+  AyuntamientoService
  } from './services.index';
 
 
@@ -46,7 +48,9 @@ import {
     TokenService,
     RoleGuard,
     ModalService,
-    CuentaService
+    CuentaService,
+    MailService,
+    AyuntamientoService
   ],
   declarations: []
 })

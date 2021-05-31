@@ -14,32 +14,16 @@ export class RegistroComponent implements OnInit {
 
   form:FormGroup;
 
-  usuario_nuevo:any = {
-    codigo_postal: "",
-    nombre: "",
-    primer_apellido: "",
-    segundo_apellido: "",
-    telefono: "",
-    direccion_email: "",
-    cuenta: {
-        nombre_perfil: "",
-        pass: "",
-        autoridad: "USUARIO_CLIENTE"
-    },
-    tipo_identificacion: "",
-    codigo_identificacion: ""
-}
-
   constructor(private fb:FormBuilder, private route:Router, private usuarioService:UsuarioService) {
     this.form = this.fb.group({
       nombre: new FormControl('', Validators.required),
       primer_apellido: new FormControl('', Validators.required),
       segundo_apellido: new FormControl('', Validators.required),
-      codigo_postal: new FormControl('', Validators.required),
+      codigo_postal: new FormControl('', [Validators.required, Validators.pattern("^\\d{5}$")]),
       tipo_identificacion: new FormControl('', Validators.required),
       codigo_identificacion: new FormControl('', Validators.required),
       telefono: new FormControl('', Validators.required),
-      direccion_email: new FormControl('', Validators.required),
+      direccion_email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")]),
       nombre_perfil: new FormControl('', Validators.required),
       pass: new FormControl('', Validators.required),
       confirmPass: new FormControl('', Validators.required)
@@ -55,7 +39,7 @@ export class RegistroComponent implements OnInit {
   onSubmit(){
 
     Swal.fire({
-      title: '¿Está seguro de querer regustrarse en el sistema?',
+      title: '¿Está seguro de querer registrarse en el sistema?',
       showCancelButton: true,
       confirmButtonText: `Si`,
       cancelButtonColor: '#d33',
@@ -75,7 +59,7 @@ export class RegistroComponent implements OnInit {
         usuario_nuevo["telefono"] = this.form.get('telefono')?.value;
         usuario_nuevo["direccion_email"] = this.form.get('direccion_email')?.value;
         cuenta["nombre_perfil"] = this.form.get('nombre_perfil')?.value;
-        cuenta["pass"] = this.form.get('pass')?.value;
+        cuenta["pass"] = btoa(this.form.get('pass')?.value);
         cuenta["autoridad"] = "ROLE_USER";
         usuario_nuevo["cuenta"] = cuenta;
 

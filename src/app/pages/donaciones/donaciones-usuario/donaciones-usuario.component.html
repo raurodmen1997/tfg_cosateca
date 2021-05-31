@@ -6,7 +6,11 @@
         </div>
     </div>
 
-    <div class="row">
+    <div *ngIf="peticionesDonacion.length == 0" class="row">
+      <p class="col-12">Aún no ha realizado ninguna petición de donación.</p>
+    </div>
+
+    <div *ngIf="peticionesDonacion.length != 0" class="row">
         <div class="col-12">
             <table class="table table-bordered table-striped">
                 <thead>

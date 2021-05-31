@@ -28,6 +28,11 @@ import { ValoracionesComponent } from './valoraciones/valoraciones.component';
 import { ValoracionComponent } from './componentes/valoracion/valoracion.component';
 import { EditarValoracionComponent } from './valoraciones/editar-valoracion/editar-valoracion.component';
 import { ObjetosListaFavoritoComponent } from './lista-favotiro/objetos-lista-favorito/objetos-lista-favorito.component';
+import { ReservasUsuarioComponent } from './reservas/reservas-usuario/reservas-usuario.component';
+import { ReservasAdminComponent } from './reservas/reservas-admin/reservas-admin.component';
+import { UsuariosOlvidadosComponent } from './usuarios-olvidados/usuarios-olvidados.component';
+import { InicioComponent } from './inicio/inicio.component';
+
 
 
 @NgModule({
@@ -50,7 +55,11 @@ import { ObjetosListaFavoritoComponent } from './lista-favotiro/objetos-lista-fa
         ValoracionesComponent,
         ValoracionComponent,
         EditarValoracionComponent,
-        ObjetosListaFavoritoComponent
+        ObjetosListaFavoritoComponent,
+        ReservasUsuarioComponent,
+        ReservasAdminComponent,
+        UsuariosOlvidadosComponent,
+        InicioComponent
     ],
     exports: [
         CommonModule
@@ -63,6 +72,7 @@ import { ObjetosListaFavoritoComponent } from './lista-favotiro/objetos-lista-fa
         CommonModule,
         BrowserModule,
         RatingModule
+       
     ]
 })
 export class PagesModule { }

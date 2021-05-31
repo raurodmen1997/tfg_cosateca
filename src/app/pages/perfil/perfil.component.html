@@ -112,6 +112,7 @@
         <div class="modal-footer">
           <button (click) = "cerralModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           <button (click) = "irEditarPerfil()" type="button" class="btn btn-primary">Editar perfil</button>
+          <button *ngIf="!authService.usuario.olvidado && authService.hasRole('ROLE_USER')" (click) = "realizarPeticionOlvido()" type="button" class="btn btn-primary">Petición olvido</button>
         </div>
       </div>
     </div>

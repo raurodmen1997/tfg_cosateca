@@ -141,4 +141,23 @@ export class ListaFavoritoService {
 
 
 
+  guardarObjetoEnListaFavorito(lista_id: number, objeto_id:number){
+
+      return this.http.get(`${this.urlEndPoint}/guardarObjeto?listaFavorito_id=${lista_id}&objeto_id=${objeto_id}`,  {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
+        map(response => response as any),
+        catchError(e =>{
+
+          if (this.tokenService.isNoAutorizado(e)) {
+            return throwError(e);
+          }
+          
+          console.error(e.error.message);
+          swal.fire('Error al añadir el objeto a la lista de favorito.', `${e.error.mensaje}`, 'error');
+          return throwError(e);
+        })
+      );
+  }
+
+
+
 }

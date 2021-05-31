@@ -9,7 +9,39 @@
 
         <ul class="navbar-nav ml-auto">
 
-          <div class="btn-group open">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/inicio']">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/objetos']">Objetos</a>
+          </li>
+          <li *ngIf="authService.hasRole('ROLE_USER')" class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/donaciones-usuario']">Mis donaciones</a>
+          </li>
+          <li *ngIf="authService.hasRole('ROLE_USER')" class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/reservas-usuario']">Mis reservas</a>
+          </li>
+          <li *ngIf="authService.hasRole('ROLE_USER')" class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/listas-favorito']">Listas favoritos</a>
+          </li>
+          <li *ngIf="authService.hasRole('ROLE_USER')" class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/valoraciones']">Valoraciones</a>
+          </li>
+
+          <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/horarios']">Gestión horarios</a>
+          </li>
+          <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/donaciones-admin']">Gestión donaciones</a>
+          </li>
+          <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/reservas-admin']">Gestión reservas</a>
+          </li>
+          <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item">
+            <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLink] = "['/usuarios-olvidados']">Gestión usuarios</a>
+          </li>
+
+          <div *ngIf="authService.isAuthenticated()"class="btn-group open">
             <!--<a class="btn btn-primary" href="#"><i class="icon-user"></i> User</a>-->
             <a class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" href="#">
               {{authService.usuario.username}}
@@ -21,28 +53,12 @@
             </ul>
           </div>
 
-          <!--
-            routerLink="/perfil"
-            
-          <li *ngIf="authService.isAuthenticated()" class="dropdown">
-            <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{authService.usuario.username}}
-            </a>
-
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" (click) = 'logout()'><i class="fas fa-sign-out-alt"></i>Cerrar sesión</a></li>
-            </ul>
-          </li>
-          -->
-
           <li *ngIf="!authService.isAuthenticated()" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-id-card"></i></a>
             <div class="dropdown-menu">
               <div *ngIf="!authService.isAuthenticated()">
-                <a class="dropdown-item" routerLinkActive="active" routerLink="/login"><i class="fas fa-user"></i>Iniciar sesión</a>
-                <a class="dropdown-item" routerLinkActive="active" routerLink="/registro"><i class="fas fa-user-plus"></i>Registro</a>
+                <a class="dropdown-item" routerLinkActive="active" routerLink="/login"><i class="fas fa-user"></i> Iniciar sesión</a>
+                <a class="dropdown-item" routerLinkActive="active" routerLink="/registro"><i class="fas fa-user-plus"></i> Registro</a>
               </div>
             </div>   
           </li>

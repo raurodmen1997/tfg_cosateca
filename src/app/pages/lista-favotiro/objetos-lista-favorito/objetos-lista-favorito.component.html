@@ -8,7 +8,7 @@
     </div>
 
     <div class="row row-cols-4">
-        <app-herramienta *ngFor="let objeto of listaFavorito.objetos" [objeto] = "objeto" (evento_objeto_id) = "eliminarObjeto($event)"></app-herramienta>     
+        <app-herramienta *ngFor="let objeto of listaFavorito.objetos" [objeto] = "objeto" [pagina] = "paginaActual" (evento_objeto_id) = "eliminarObjeto($event)"></app-herramienta>     
     </div>
 
     <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('listas-favorito', null!)">

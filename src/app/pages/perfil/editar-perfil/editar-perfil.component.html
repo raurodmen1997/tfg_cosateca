@@ -160,12 +160,15 @@
         <button class="btn btn-primary mr-2" [disabled]="form.invalid">
           Guardar
         </button>
+        <button type="button" class="btn btn-primary mr-2" (click) = "cambiarPass()">
+          Cambiar contraseña
+        </button>
         <button
           class="btn btn-danger"
           type="button"
           (click)="comunService.ir_a('inicio', null!)"
         >
-          Cancelar
+          Volver
         </button>
       </form>
     </div>

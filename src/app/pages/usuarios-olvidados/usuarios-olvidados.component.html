@@ -1,0 +1,44 @@
+<div class="container animated fadeInLeft">
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <h1>Usuarios a ser olvidados</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Dirección de correo</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let usuario of usuarios">
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.primer_apellido}} {{usuario.segundo_apellido}}</td>
+                    <td>{{usuario.direccion_email}}</td>
+                    <td>{{usuario.telefono}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click) = "eliminarUsuario(usuario)">Eliminar</button>   
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <paginator-nav *ngIf="paginador" [url] = "url" [paginador]="paginador"></paginator-nav>
+
+    <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
+      Volver
+    </button>
+    
+
+</div>
+

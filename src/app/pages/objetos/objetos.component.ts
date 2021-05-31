@@ -10,6 +10,7 @@ import { ComunService, ObjetoService } from 'src/app/services/services.index';
 export class ObjetosComponent implements OnInit {
 
   objetos:any[] = [];
+  pagina:string = "objetos";
 
   constructor(private objetoService:ObjetoService, public comunService:ComunService) { }
 
