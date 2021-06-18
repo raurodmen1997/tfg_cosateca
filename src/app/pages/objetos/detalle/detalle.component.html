@@ -1,5 +1,5 @@
 <div class="container animated fadeInLeft">
-  <div class="row mb-3">
+  <div class="row">
     <div class="col-12">
       <h1>Detalle del objeto</h1>
     </div>
@@ -12,11 +12,11 @@
           <app-herramienta *ngIf="objeto" [objeto]="objeto" [pagina] = "pagina"></app-herramienta>
         </div>
 
-        <div class="col-6" style="overflow-y: scroll; height: 360px;">
+        <div class="col-6">
 
           <div class="row">
               <div class="col-12">
-                <h3 style="text-align: center;">Valoraciones</h3>
+                <h2 style="text-align: center;">Valoraciones</h2>
               </div>
           </div>
 
@@ -24,17 +24,33 @@
             <p class="col-12">Este objeto aún no tiene valoraciones.</p>
           </div>
 
-          <div *ngFor="let valoracion of valoracionesObjeto" class="card">
-            <h6 class="card-header">{{valoracion.usuario.segundo_apellido}} {{valoracion.usuario.primer_apellido}}, {{valoracion.usuario.nombre}} - {{valoracion.fecha_creacion | date: 'dd/MM/yyyy'}} <star-rating [value]="valoracion.puntuacion" [totalstars]="5" checkedcolor="orange" uncheckedcolor="grey" size="14px" [readonly]="true"></star-rating> </h6>
-            
-            <div class="card-body">
-              <p class="card-text">
-                {{valoracion.comentario}}
-              </p>
+          <div *ngIf="valoracionesObjeto.length != 0" class="row" style="overflow-y: scroll; height: 360px;">
+            <div class="col-12">
+
+              <div *ngFor="let valoracion of valoracionesObjeto" class="card">             
+                <h5 class="card-header">{{valoracion.usuario.primer_apellido}} {{valoracion.usuario.segundo_apellido}}, {{valoracion.usuario.nombre}} - {{valoracion.fecha_creacion | date: 'dd/MM/yyyy'}} <star-rating [value]="valoracion.puntuacion" [totalstars]="5" checkedcolor="orange" uncheckedcolor="grey" size="14px" [readonly]="true"></star-rating> </h5>            
+                <div class="card-body">
+                  <p class="card-text">
+                    {{valoracion.comentario}}
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
 
+
+          <button *ngIf="authService.hasRole('ROLE_USER')" class="btn btn-primary mt-2" type="button" (click) = "comunService.ir_a('crear-valoracion', objeto.id)">
+            Nueva valoración
+          </button>
+         
+
+          
+
         </div>
+
+        
+
       </div>
     </div>
   </div>

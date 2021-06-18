@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ComunService, DonacionesAdminService, DonacionesUsuarioService } from 'src/app/services/services.index';
 import Swal from 'sweetalert2';
 
@@ -16,7 +16,10 @@ export class DonacionesAdminComponent implements OnInit {
   url:any;
 
 
-  constructor(private activatedRoute: ActivatedRoute, public comunService:ComunService, private donacionesAdminService:DonacionesAdminService) { }
+  constructor(private activatedRoute: ActivatedRoute, 
+              public comunService:ComunService, 
+              private donacionesAdminService:DonacionesAdminService,
+              private router:Router) { }
 
   ngOnInit(): void {
 
@@ -27,10 +30,15 @@ export class DonacionesAdminComponent implements OnInit {
         page = 0;
       }
       this.donacionesAdminService.getPeticionesPendientesDeRevision(page).subscribe(response=>{
-        this.peticionesDonacionAdmin = response.content;
+        
         console.log(this.peticionesDonacionAdmin);
-        this.paginador = response;
-        this.url = '/donaciones-admin/page';
+        if(page >= response.totalPages){
+          this.router.navigate(['/donaciones-admin']);
+        }else{
+          this.peticionesDonacionAdmin = response.content;
+          this.paginador = response;
+          this.url = '/donaciones-admin/page';
+        }
       });
 
     });
@@ -56,11 +64,12 @@ export class DonacionesAdminComponent implements OnInit {
    * @param peticionDOnacion Petición de donación a aceptar
    */
   aceptar(peticionDonacion:any){
-
     Swal.fire({
       title: 'Aceptar petición de donación.',
-      text: `¿Está seguro de querer aceptar la petición de donación seleccionada? Se añadirá a la lista de objetos en el caso de aceptarla.`,
+      text: `¿Está seguro de querer aceptar la petición de donación seleccionada? Se añadirá a la lista de objetos
+      en el caso de aceptarla.`,
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Si`,
       cancelButtonColor: '#d33',
       icon: 'warning'
@@ -71,12 +80,11 @@ export class DonacionesAdminComponent implements OnInit {
           this.peticionesDonacionAdmin = this.peticionesDonacionAdmin.filter(peti => peti.id !== peticionDonacion.id);
           Swal.fire('Operación realizada con éxito.', resultado.mensaje, 'success');
         });
-
       }
-
     });
-
   }
+
+
 
 
   /**
@@ -89,6 +97,7 @@ export class DonacionesAdminComponent implements OnInit {
       title: 'Rechazar petición de donación.',
       text: `¿Está seguro de querer rechazar la petición de donación seleccionada?`,
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Si`,
       cancelButtonColor: '#d33',
       icon: 'warning'

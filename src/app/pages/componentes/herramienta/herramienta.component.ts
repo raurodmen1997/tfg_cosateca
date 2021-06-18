@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { AuthService, ListaFavoritoService, ValoracionService } from 'src/app/services/services.index';
+import { AuthService, ComunService, ListaFavoritoService, ObjetoService, ValoracionService } from 'src/app/services/services.index';
 import Swal from 'sweetalert2';
 import swal from 'sweetalert2';
 
@@ -19,7 +19,11 @@ export class HerramientaComponent implements OnInit {
 
   @Output() evento_objeto_id = new EventEmitter<number>();
   
-  constructor(private valoracionesService:ValoracionService, public authService:AuthService, private listaFavoritoService:ListaFavoritoService) { }
+  constructor(private valoracionesService:ValoracionService, 
+              public authService:AuthService, 
+              private listaFavoritoService:ListaFavoritoService,
+              public comunService:ComunService,
+              private objetoService:ObjetoService) { }
 
   ngOnInit(): void {
 
@@ -55,6 +59,7 @@ export class HerramientaComponent implements OnInit {
           input: 'select',
           inputOptions: opciones,
           showCancelButton: true,
+          cancelButtonText: 'Cancelar',
           confirmButtonText: `Aceptar`,
           cancelButtonColor: '#d33',
           icon: 'warning'   
@@ -74,6 +79,7 @@ export class HerramientaComponent implements OnInit {
           title: 'Listas de favorito del usuario.',
           text: "Aún no tiene creada ninguna lista de favorito. ¿Desea guardar el objeto en la lista de favorito 'favoritos'? El sistema creará automáticamente la lista por usted.",
           showCancelButton: true,
+          cancelButtonText: 'Cancelar',
           confirmButtonText: `Aceptar`,
           cancelButtonColor: '#d33',
           icon: 'warning'   
@@ -133,6 +139,52 @@ export class HerramientaComponent implements OnInit {
       }
     })
     */
+
+  }
+
+
+  inhabilitarObjeto(objeto:any){
+
+    swal.fire({
+      title: 'Inhabilitar herramienta.',
+      text: '¿Está seguro de querer inhabilitar la herramienta seleccionada?',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: `Si`,
+      cancelButtonColor: '#d33',
+      icon: 'warning'   
+    }).then((result) => {
+
+      if(result.isConfirmed){
+        this.objetoService.inhabilitarObjeto(objeto.id).subscribe(resultado=>{
+          objeto.accesible = resultado.objeto.accesible;
+          swal.fire('Operación realizada correctamente.', resultado.mensaje, 'success');
+        });
+      }
+    });
+
+  }
+
+
+  habilitarObjeto(objeto:any){
+
+    swal.fire({
+      title: 'Habilitar herramienta.',
+      text: '¿Está seguro de querer habilitar la herramienta seleccionada?',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: `Si`,
+      cancelButtonColor: '#d33',
+      icon: 'warning'   
+    }).then((result) => {
+
+      if(result.isConfirmed){
+        this.objetoService.habilitarObjeto(objeto.id).subscribe(resultado=>{
+          objeto.accesible = resultado.objeto.accesible;
+          swal.fire('Operación realizada correctamente.', resultado.mensaje, 'success');
+        });
+      }
+    });
 
   }
 

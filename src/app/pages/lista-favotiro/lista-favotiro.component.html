@@ -1,5 +1,5 @@
 <div class="container animated fadeInLeft">
-  <div class="row mb-3">
+  <div class="row">
     <div class="col-12">
       <h1>Listas favorito</h1>
     </div>
@@ -35,7 +35,7 @@
 
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{ lista.nombre }}</h5>
+                <h4 class="card-title">{{ lista.nombre }}</h4>
                 <a
                   *ngIf="lista.objetos.length !== 0"
                   [routerLink]="['/objetos-lista-favorito', lista.id]"

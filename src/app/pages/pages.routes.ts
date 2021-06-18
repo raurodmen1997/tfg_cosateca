@@ -22,6 +22,10 @@ import { ObjetosListaFavoritoComponent } from './lista-favotiro/objetos-lista-fa
 import { ReservasUsuarioComponent } from './reservas/reservas-usuario/reservas-usuario.component';
 import { ReservasAdminComponent } from './reservas/reservas-admin/reservas-admin.component';
 import { UsuariosOlvidadosComponent } from './usuarios-olvidados/usuarios-olvidados.component';
+import { CrearPeticionReservaComponent } from './reservas/reservas-usuario/crear-peticion-reserva/crear-peticion-reserva.component';
+import { CrearValoracionComponent } from './valoraciones/crear-valoracion/crear-valoracion.component';
+import { TycComponent } from './tyc/tyc.component';
+import { PoliticaPrivacidadComponent } from './politica-privacidad/politica-privacidad.component';
 
 
 
@@ -63,15 +67,22 @@ const pagesRoutes: Routes = [
 
             { path:'valoraciones', component:ValoracionesComponent, canActivate: [RoleGuard], data:{titulo:'Mis valoraciones',  role: 'ROLE_USER'}},
             { path:'editar-valoracion/:valoracion_id', component:EditarValoracionComponent, canActivate: [RoleGuard], data:{titulo:'Editar valoración',  role: 'ROLE_USER'}},
+            { path:'crear-valoracion/:objeto_id', component:CrearValoracionComponent, canActivate: [RoleGuard], data:{titulo:'Crear valoración',  role: 'ROLE_USER'}},
            
             { path:'reservas-usuario', component:ReservasUsuarioComponent, canActivate: [RoleGuard], data:{titulo:'Mis peticiones de reserva',  role: 'ROLE_USER'}},
+            { path:'reservas-usuario/page/:page', component:ReservasUsuarioComponent, canActivate: [RoleGuard], data:{titulo:'Mis peticiones de reserva',  role: 'ROLE_USER'}},
+            { path:'crear-peticion-reserva/:objeto_id', component:CrearPeticionReservaComponent, canActivate: [RoleGuard], data:{titulo:'Crear petición reserva',  role: 'ROLE_USER'}},
 
             { path:'reservas-admin', component:ReservasAdminComponent, canActivate: [RoleGuard], data:{titulo:'Reservas',  role: 'ROLE_ADMIN'}},
+            { path:'reservas-admin/page/:page', component:ReservasAdminComponent, canActivate: [RoleGuard], data:{titulo:'Reservas',  role: 'ROLE_ADMIN'}},
 
             { path:'usuarios-olvidados', component:UsuariosOlvidadosComponent, canActivate: [RoleGuard], data:{titulo:'Usuarios olvidados',  role: 'ROLE_ADMIN'}},
             { path:'usuarios-olvidados/page/:page', component: UsuariosOlvidadosComponent, canActivate: [RoleGuard], data:{titulo:'Usuarios olvidados', role: 'ROLE_ADMIN'}},
 
            
+            { path:'terminos-y-condiciones', component:TycComponent, data:{titulo:'Usuarios olvidados'}},
+            { path:'politica-privacidad', component:PoliticaPrivacidadComponent, data:{titulo:'Usuarios olvidados'}},
+
         ]
     }
 ];

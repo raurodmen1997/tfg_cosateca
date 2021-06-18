@@ -1,21 +1,102 @@
 
-<div *ngIf="objetos !== []" class="container animated fadeInLeft">
+<div class="container animated fadeInLeft">
 
-    <!--<div class="row">
+    <div class="row">
+        <div class="col-12">
+            <h1>Herramientas</h1>
+        </div>
+    </div>
 
-        <div class="col-12">-->
+    <div *ngIf="objetos.length == 0 && !busquedaIniciada" class="row">
+        <p class="col-12">Aún no hay herramientas en el sistema.</p>
+    </div>
 
-            <div class="row row-cols-4">
-                <app-herramienta *ngFor="let objeto of objetos" [objeto] = "objeto" [pagina] = "pagina"></app-herramienta>     
+        <form *ngIf="objetos.length != 0 || busquedaIniciada" class="mb-2" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div *ngIf="authService.hasRole('ROLE_ADMIN')" class="row">
+ 
+                <div class="col-auto">
+
+                    <div class="row">
+                        <div class="col-auto">
+                          <label for="inputPassword6" class="col-form-label">Categoría</label>
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-control" 
+                            formControlName="categoria">
+                            <option value="Golpe">Golpe</option>
+                            <option value="Unión">Unión</option>
+                            <option value="Corte">Corte</option>
+                            <option value="Sujeción">Sujeción</option>
+                            <option value="Medición">Medición</option>
+                            <option value="Montaje">Montaje</option>             
+                        </select>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="col-auto">
+                    <div class="row">
+                        <div class="col-auto">
+                          <label for="inputPassword6" class="col-form-label">Accesibilidad</label>
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-control" 
+                            formControlName="accesible">
+                            <option value="1">SI</option>
+                            <option value="0">NO</option>
+                            <option value="">TODAS</option>           
+                        </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <button class="btn btn-outline-secondary" [disabled]="!form.dirty"><i class="fas fa-search"></i></button>
+                        <button class="btn btn-outline-secondary" [disabled]="!form.dirty" (click) = "limpiarForm()" type="button"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="authService.hasRole('ROLE_USER') || !authService.isAuthenticated()" class="form-row">
+
+                <div class="col-4">
+
+                    <div class="form-group">
+
+                        <label>Categoría</label>
+                        <div class="input-group">
+                          <select class="form-control" 
+                              formControlName="categoria">
+                              <option value="Golpe">Golpe</option>
+                              <option value="Unión">Unión</option>
+                              <option value="Corte">Corte</option>
+                              <option value="Sujeción">Sujeción</option>
+                              <option value="Medición">Medición</option>
+                              <option value="Montaje">Montaje</option>
+                             
+                          </select>
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" [disabled]="form.get('categoria')?.value == '' || form.get('categoria')?.value == null" type="submit"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-outline-secondary" [disabled]="form.get('categoria')?.value == '' || form.get('categoria')?.value == null" (click) = "limpiarForm()" type="button"><i class="fas fa-times"></i></button>
+                          </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+
             </div>
             
-     <!--   </div>
+        </form>
 
-    </div>-->
+    <div *ngIf="objetos.length != 0" class="row row-cols-4">
+        <app-herramienta *ngFor="let objeto of objetos" [objeto] = "objeto" [pagina] = "pagina"></app-herramienta>     
+    </div>
+            
 
     <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
         Volver
     </button>
     
 </div>
-

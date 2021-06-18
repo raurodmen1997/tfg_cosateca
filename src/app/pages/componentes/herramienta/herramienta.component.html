@@ -51,9 +51,11 @@
       <star-rating *ngIf="valoracionMedia" [value]="valoracionMedia" [totalstars]="5" checkedcolor="orange" uncheckedcolor="grey" size="14px" [readonly]="true"></star-rating>
     </div>
     <div class="card-body">
-      <a *ngIf="pagina != 'detalle-objeto'" [routerLink]="['/detalle-objeto', objeto.id]" class="btn btn-outline-primary btn-block">Ver</a>
-      <a *ngIf="authService.hasRole('ROLE_ADMIN')" href="#" class="btn btn-outline-primary btn-block">Eliminar</a>
+      <a *ngIf="pagina != 'detalle-objeto' && pagina != 'crear-peticion-reserva'" [routerLink]="['/detalle-objeto', objeto.id]" class="btn btn-outline-primary btn-block">Ver</a>
+      <a *ngIf="authService.hasRole('ROLE_ADMIN') && objeto.accesible" (click) = "inhabilitarObjeto(objeto)" class="btn btn-outline-primary btn-block">Inhabilitar</a>
+      <a *ngIf="authService.hasRole('ROLE_ADMIN') && !objeto.accesible" (click) = "habilitarObjeto(objeto)" class="btn btn-outline-primary btn-block">Habilitar</a>
       <a *ngIf="authService.hasRole('ROLE_USER') && (pagina == 'objetos' || pagina == 'detalle-objeto')" (click) = "anadirA(objeto.id)" class="btn btn-outline-primary btn-block">Añadir a</a>
+      <a *ngIf="authService.hasRole('ROLE_USER') && (pagina == 'detalle-objeto')" (click) = "comunService.ir_a('crear-peticion-reserva', objeto.id)" class="btn btn-outline-primary btn-block">Realizar reserva</a>
     </div>
   </div>
   

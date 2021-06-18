@@ -43,6 +43,7 @@ export class PerfilComponent implements OnInit {
       title: `¿Está seguro de querer realizar la petición de olvido?`,
       text: 'Se procederá a enviar un correo a la dirección de correo del ayuntamiento para tramitar su petición.',
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Aceptar`,
       cancelButtonColor: '#d33',
       icon: 'warning'

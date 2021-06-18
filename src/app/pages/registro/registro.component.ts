@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services/services.index';
+import { UsuarioService, ValidacionesService } from 'src/app/services/services.index';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +14,7 @@ export class RegistroComponent implements OnInit {
 
   form:FormGroup;
 
-  constructor(private fb:FormBuilder, private route:Router, private usuarioService:UsuarioService) {
+  constructor(private fb:FormBuilder, private route:Router, private usuarioService:UsuarioService, private validacionesService:ValidacionesService) {
     this.form = this.fb.group({
       nombre: new FormControl('', Validators.required),
       primer_apellido: new FormControl('', Validators.required),
@@ -26,7 +26,11 @@ export class RegistroComponent implements OnInit {
       direccion_email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")]),
       nombre_perfil: new FormControl('', Validators.required),
       pass: new FormControl('', Validators.required),
-      confirmPass: new FormControl('', Validators.required)
+      confirmPass: new FormControl('', Validators.required),
+      check: new FormControl('', Validators.required)
+    }, {
+
+      validators: [this.validacionesService.camposIguales('pass', 'confirmPass'), this.validacionesService.contieneCodigoPostal('codigo_postal')]
     });
     
    }
@@ -41,6 +45,7 @@ export class RegistroComponent implements OnInit {
     Swal.fire({
       title: '¿Está seguro de querer registrarse en el sistema?',
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Si`,
       cancelButtonColor: '#d33',
       icon: 'warning'

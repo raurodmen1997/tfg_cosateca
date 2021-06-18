@@ -1,12 +1,16 @@
 <div class="container animated fadeInLeft">
 
-    <div class="row mb-3">
+    <div class="row">
         <div class="col-12">
             <h1>Horarios</h1>
         </div>
     </div>
 
-    <div class="row">
+    <div *ngIf="horarios.length == 0" class="row">
+      <p class="col-12">Aún no hay horarios creados en el sistema.</p>
+    </div>
+
+    <div *ngIf="horarios.length != 0" class="row">
         <div class="col-12">
             <table class="table table-bordered table-striped">
                 <thead>
@@ -24,10 +28,10 @@
                     <td>{{horario.hora_apertura}}</td>
                     <td>{{horario.hora_cierre}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary" (click) = "comunService.ir_a('editar-horario', horario.id)">Editar</button>               
+                        <button type="button" class="btn btn-outline-primary" (click) = "comunService.ir_a('editar-horario', horario.id)">Editar</button>               
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger" (click) = "eliminarHorario(horario)">Eliminar</button>
+                        <button type="button" class="btn btn-outline-danger" (click) = "eliminarHorario(horario)">Eliminar</button>
                     </td>
                   </tr>
                 </tbody>
@@ -35,7 +39,7 @@
         </div>
     </div>
 
-    <paginator-nav *ngIf="paginador" [url] = "url" [paginador]="paginador"></paginator-nav>
+    <paginator-nav *ngIf="paginador && horarios.length != 0" [url] = "url" [paginador]="paginador"></paginator-nav>
 
     <button class="btn btn-primary mr-2" (click) = "comunService.ir_a('nuevo-horario', null!)">
       Nuevo horario

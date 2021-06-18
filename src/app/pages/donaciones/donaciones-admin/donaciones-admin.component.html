@@ -6,7 +6,11 @@
         </div>
     </div>
 
-    <div class="row">
+    <div *ngIf="peticionesDonacionAdmin.length == 0" class="row">
+      <p class="col-12">Aún no hay peticiones de donación en el sistema.</p>
+    </div>
+
+    <div *ngIf="peticionesDonacionAdmin.length != 0" class="row">
         <div class="col-12">
             <table class="table table-bordered table-striped">
                 <thead>
@@ -41,7 +45,7 @@
         </div>
     </div>
 
-    <paginator-nav *ngIf="paginador" [url] = "url" [paginador]="paginador"></paginator-nav>
+    <paginator-nav *ngIf="paginador && peticionesDonacionAdmin.length != 0" [url] = "url" [paginador]="paginador"></paginator-nav>
 
     <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
       Volver

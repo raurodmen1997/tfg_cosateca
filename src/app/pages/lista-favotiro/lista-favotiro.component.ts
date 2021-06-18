@@ -41,6 +41,7 @@ export class ListaFavotiroComponent implements OnInit {
     Swal.fire({
       title: `¿Está seguro de querer eliminar la lista '${lista.nombre}'?`,
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Eliminar`,
       cancelButtonColor: '#d33',
       icon: 'warning'
@@ -71,6 +72,7 @@ export class ListaFavotiroComponent implements OnInit {
         inputValue: '',
         inputLabel: 'Nombre de la lista',
         showCancelButton: true,
+        cancelButtonText: 'Cancelar',
         confirmButtonText: `Modificar`,
         cancelButtonColor: '#d33',
         icon: 'warning',       
@@ -112,6 +114,7 @@ export class ListaFavotiroComponent implements OnInit {
       inputValue: '',
       inputLabel: 'Nombre de la lista',
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Guardar`,
       cancelButtonColor: '#d33',
       icon: 'warning',       

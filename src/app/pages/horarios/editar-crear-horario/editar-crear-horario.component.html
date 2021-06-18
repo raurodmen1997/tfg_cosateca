@@ -10,7 +10,9 @@
 
                     <div class="col-4">
                         <label>Día</label>                        
-                        <select class="form-control" formControlName="dia">
+                        <select class="form-control" 
+                        [ngClass]="{'is-invalid': form.get('dia')?.touched && form.get('dia')?.invalid}"
+                        formControlName="dia">
                             <option value="Lunes">Lunes</option>
                             <option value="Martes">Martes</option>
                             <option value="Miercoles">Miercoles</option>
@@ -20,6 +22,9 @@
                             <option value="Domingo">Domingo</option>
                             <!--<option *ngFor="let valor of universidades" [value]="valor.nombre">{{valor.nombre}}</option>-->
                         </select>
+                        <div class="invalid-feedback" *ngIf="form.get('dia')?.touched && form.get('dia')?.hasError('required')">
+                            Es requerido.
+                        </div>
                         
                         <!--
                         <div *ngIf="form.get('dia')?.hasError('required')">
@@ -34,8 +39,15 @@
                         <input 
                             type="time"
                             class="form-control" 
+                            [ngClass]="{'is-invalid': form.get('hora_apertura')?.touched && form.get('hora_apertura')?.invalid}"
                             formControlName="hora_apertura"
                         /> 
+                        <div class="invalid-feedback" *ngIf="form.get('hora_apertura')?.touched && form.get('hora_apertura')?.hasError('required')">
+                            Es requerido.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="form?.hasError('horaInvalida')">
+                            Hora de apertura menor o igual a la hora de cierre.
+                        </div>
                     </div>
 
                     <div class="col-4">
@@ -43,8 +55,12 @@
                         <input 
                             type="time"
                             class="form-control" 
+                            [ngClass]="{'is-invalid': form.get('hora_cierre')?.touched && form.get('hora_cierre')?.invalid}"
                             formControlName="hora_cierre"
-                        />             
+                        />       
+                        <div class="invalid-feedback" *ngIf="form.get('hora_cierre')?.touched && form.get('hora_cierre')?.hasError('required')">
+                            Es requerido.
+                        </div>      
                     </div>
 
                 </div>

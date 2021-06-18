@@ -1,6 +1,6 @@
 <div class="container animated fadeInLeft">
 
-    <div class="row mb-3">
+    <div class="row">
         <div class="col-12">
           <h1>Edición de valoración</h1>
         </div>
@@ -19,7 +19,12 @@
                         <div class="form-group">
 
                             <label>Comentario</label>   
-                            <textarea class="form-control"  rows="3" formControlName="comentario"></textarea>
+                            <textarea class="form-control"  
+                            [ngClass]="{'is-invalid': form.get('comentario')?.touched && form.get('comentario')?.invalid}"
+                            rows="3" formControlName="comentario"></textarea>
+                            <div class="invalid-feedback" *ngIf="form.get('comentario')?.touched && form.get('comentario')?.hasError('required')">
+                                Es requerido.
+                            </div>
 
                         </div>
 
@@ -27,7 +32,15 @@
 
                     <div class="col-2">
                         <label>Puntuación</label> 
-                        <input class="form-control" type="number" step="any" formControlName="puntuacion">
+                        <input class="form-control"
+                        [ngClass]="{'is-invalid': form.get('puntuacion')?.touched && form.get('puntuacion')?.invalid}" 
+                        type="number" step="any" formControlName="puntuacion">
+                        <div class="invalid-feedback" *ngIf="form.get('puntuacion')?.touched && form.get('puntuacion')?.hasError('required')">
+                            Es requerido.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="form.get('puntuacion')?.touched && (form.get('puntuacion')?.hasError('min') || form.get('puntuacion')?.hasError('max'))">
+                            Debe estar entre 0 y 5.
+                        </div>
                     </div>
                     
                 </div>

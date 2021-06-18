@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService, ComunService, PeticionDonacionService } from '../../../services/services.index';
@@ -25,44 +25,7 @@ export class CrearDonacionComponent implements OnInit {
     usuario: this.authService.usuario
   }
 
-  /**
-   *  "ayuntamiento": {
-        "id": 1,
-        "municipio": "La rinconada",
-        "nombre": "Ayuntamiento de la Rinconada",
-        "provincia": "Sevilla",
-        "codigos_postales": [
-            41300,
-            41309
-        ],
-        "cuenta": {
-            "id": 1,
-            "nombre_perfil": "admin",
-            "pass": "21232f297a57a5a743894a0e4a801fc3",
-            "autoridad": "ROLE_ADMIN"
-        },
-        "direccion_email": " info@aytolarinconada.es"
-    },
-
-     "usuario": {
-        "id": 1,
-        "codigo_postal": 41300,
-        "nombre": "Raul",
-        "primer_apellido": "Rodriguez",
-        "segundo_apellido": "Mendez",
-        "telefono": "674761837",
-        "direccion_email": "raulrodriguezmendez97@gmail.com",
-        "cuenta": {
-            "id": 2,
-            "nombre_perfil": "raul",
-            "pass": "8979054b38dbd9ed52373e3fd83ce164",
-            "autoridad": "ROLE_USER"
-        },
-        "carro_compra": {},
-        "tipo_identificacion": "NIF",
-        "codigo_identificacion": "53346768Q"
-    }
-   */
+  @ViewChild('labelPlano') labelPlano!: ElementRef;
 
   constructor(private fb: FormBuilder, private router: Router, 
               public comunService:ComunService, 
@@ -92,6 +55,12 @@ export class CrearDonacionComponent implements OnInit {
    * @param event Evento que se produce al cambiar el archivo en el imput.
    */
   establecerFile(event:any){
+    console.log(event);
+    if(event.srcElement.files.length !== 0){
+      this.labelPlano.nativeElement.textContent = event.srcElement.files[0].name;
+    }else{
+      this.labelPlano.nativeElement.textContent = "Seleccionar archivo";
+    }   
     this.file = event.target.files[0];
   }
 
@@ -104,6 +73,7 @@ export class CrearDonacionComponent implements OnInit {
     Swal.fire({
       title: '¿Está seguro de querer realizar la petición de donación?',
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Si`,
       cancelButtonColor: '#d33',
       icon: 'warning'
@@ -121,14 +91,14 @@ export class CrearDonacionComponent implements OnInit {
         this.peticionDonacionService.guardarPeticionDonacion(this.peticionDonacion).subscribe(resultado_peticion_donacion =>{
           Swal.fire('Operación realizada correctamente.', resultado_peticion_donacion.mensaje, 'success');
           this.router.navigate(['/donaciones-usuario']);
-        })
-
-       })
+        });
+       });
       }
-
-    })
-
-
+    });
   }
+
+
+
+  
 
 }

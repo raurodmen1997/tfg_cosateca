@@ -52,6 +52,7 @@ export class EditarValoracionComponent implements OnInit {
     Swal.fire({
       title: '¿Está seguro de querer actualizar la valoración?',
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Si`,
       cancelButtonColor: '#d33',
       icon: 'warning',

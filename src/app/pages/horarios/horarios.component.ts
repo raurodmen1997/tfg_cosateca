@@ -58,6 +58,7 @@ export class HorariosComponent implements OnInit {
     Swal.fire({
       title: `¿Está seguro de querer eliminar el horario '${horario.dia} de  ${horario.hora_apertura} a ${horario.hora_cierre}'?`,
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Eliminar`,
       cancelButtonColor: '#d33',
       icon: 'warning'

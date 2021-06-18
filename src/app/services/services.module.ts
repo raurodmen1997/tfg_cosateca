@@ -19,8 +19,11 @@ import {
   ModalService,
   CuentaService,
   MailService,
-  AyuntamientoService
+  AyuntamientoService,
+  ValidacionesService
  } from './services.index';
+import { ReservasUserService } from './reservas/reservas-user.service';
+import { ReservasAdminService } from './reservas/reservas-admin.service';
 
 
 
@@ -50,7 +53,10 @@ import {
     ModalService,
     CuentaService,
     MailService,
-    AyuntamientoService
+    AyuntamientoService,
+    ValidacionesService,
+    ReservasUserService,
+    ReservasAdminService
   ],
   declarations: []
 })

@@ -42,6 +42,7 @@ export class ObjetosListaFavoritoComponent implements OnInit {
     Swal.fire({
       title: `¿Está seguro de querer eliminar el objeto seleccionado?`,
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Eliminar`,
       cancelButtonColor: '#d33',
       icon: 'warning'

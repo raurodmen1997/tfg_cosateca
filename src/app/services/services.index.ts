@@ -18,6 +18,9 @@ export { ModalService } from './modal/modal.service';
 export { CuentaService } from './cuenta/cuenta.service';
 export { MailService } from './mail/mail.service';
 export { AyuntamientoService } from './ayuntamiento/ayuntamiento.service';
+export { ValidacionesService } from './validaciones/validaciones.service';
+export { ReservasUserService } from './reservas/reservas-user.service';
+export { ReservasAdminService } from './reservas/reservas-admin.service';
 
 
 

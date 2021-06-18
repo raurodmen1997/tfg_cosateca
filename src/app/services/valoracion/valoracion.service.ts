@@ -123,6 +123,22 @@ export class ValoracionService {
       );
     }
 
+    crearValoracion(valoracion:any){
+      return this.http.post(`${this.urlEndPoint}`, valoracion, {headers: this.tokenService.agregarAutorizacionToken()}).pipe(
+        map(response => response as any),
+        catchError(e =>{
+  
+          if (this.tokenService.isNoAutorizado(e)) {
+            return throwError(e);
+          }
+  
+          console.error(e.error.error);
+          swal.fire('Error al crear la valoración.', `${e.error.mensaje}`, 'error');
+          return throwError(e);
+        })
+      );
+    }
+
 
     
 }

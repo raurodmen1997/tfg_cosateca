@@ -19,11 +19,20 @@
 
                         <div class="form-group">
                             <label>Categoría</label>                        
-                            <input 
-                                type="text"
-                                class="form-control" 
-                                formControlName="categoria"
-                            /> 
+                            <select class="form-control" 
+                                [ngClass]="{'is-invalid': form.get('categoria')?.touched && form.get('categoria')?.invalid}"
+                                formControlName="categoria">
+                                <option value="Golpe">Golpe</option>
+                                <option value="Unión">Unión</option>
+                                <option value="Corte">Corte</option>
+                                <option value="Sujeción">Sujeción</option>
+                                <option value="Medición">Medición</option>
+                                <option value="Montaje">Montaje</option>
+                            <!--<option *ngFor="let valor of universidades" [value]="valor.nombre">{{valor.nombre}}</option>-->
+                            </select>
+                            <div class="invalid-feedback" *ngIf="form.get('categoria')?.touched && form.get('categoria')?.hasError('required')">
+                                Es requerido.
+                            </div>
                         </div>
                         
                     </div>
@@ -35,8 +44,12 @@
                             <input 
                                 type="text"
                                 class="form-control" 
+                                [ngClass]="{'is-invalid': form.get('nombre')?.touched && form.get('nombre')?.invalid}"
                                 formControlName="nombre"
                             /> 
+                            <div class="invalid-feedback" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.hasError('required')">
+                                Es requerido.
+                            </div>
 
                         </div>
                         
@@ -44,18 +57,30 @@
 
                     <div class="col-6">
 
-                        <div class="form-group">
+                        <!--<div class="form-group">-->
 
                             <label>Imagen</label>
-                            <input 
-                                type="file"
-                                formControlName="imagen"
-                                class="form-control"
-                                (change) = "establecerFile($event)"
-                                accept=".png,.jpg,.jpeg"
-                            />  
+                            <div class="custom-file">
 
-                        </div>
+                                <input 
+                                    type="file"
+                                    formControlName="imagen"
+                                    class="custom-file-input"
+                                    [ngClass]="{'is-invalid': form.get('imagen')?.touched && form.get('imagen')?.invalid}"
+                                    (change) = "establecerFile($event)"
+                                    accept=".png,.jpg,.jpeg"
+                                />  
+                                <label #labelPlano for="customFile" class="custom-file-label" data-browse="Elegir">
+                                    Seleccionar archivo
+                                </label>
+                                <div class="invalid-feedback" *ngIf="form.get('imagen')?.touched && form.get('imagen')?.hasError('required')">
+                                    Es requerido.
+                                </div>
+
+                            </div>
+                            
+
+                        <!--</div>-->
                                    
                     </div>
 
@@ -68,7 +93,12 @@
                         <div class="form-group">
 
                             <label>Descripción</label>   
-                            <textarea class="form-control"  rows="3" formControlName="descripcion"></textarea>
+                            <textarea class="form-control"  
+                            [ngClass]="{'is-invalid': form.get('descripcion')?.touched && form.get('descripcion')?.invalid}"
+                            rows="3" formControlName="descripcion"></textarea>
+                            <div class="invalid-feedback" *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.hasError('required')">
+                                Es requerido.
+                            </div>
 
                         </div>
 

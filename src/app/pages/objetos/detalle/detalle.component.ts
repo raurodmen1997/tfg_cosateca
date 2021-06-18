@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ComunService, ObjetoService, ValoracionService } from 'src/app/services/services.index';
+import { AuthService, ComunService, ObjetoService, ValoracionService } from 'src/app/services/services.index';
 
 @Component({
   selector: 'app-detalle',
@@ -23,7 +23,8 @@ export class DetalleComponent implements OnInit {
     private router: Router,
     private objetoService:ObjetoService,
     private valoracionService:ValoracionService,
-    public comunService:ComunService) { }
+    public comunService:ComunService,
+    public authService:AuthService) { }
 
   ngOnInit(): void {
 

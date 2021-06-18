@@ -60,6 +60,15 @@ export class DonacionesAdminService {
   }
 
 
+
+
+
+
+
+
+  
+
+
   rechazarPeticionDonacion(peticionDonacion_id:any){
     return this.http.put(`${this.urlEndPoint}/rechazar/${peticionDonacion_id}`, null, {headers:this.tokenService.agregarAutorizacionToken()}).pipe(
       map(response => response as any),

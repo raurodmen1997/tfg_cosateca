@@ -13,5 +13,7 @@ export class Usuario {
     tipo_identificacion: any;
     olvidado: any;
     id_cuenta: any;
+    provincia: any;
+    municipio: any;
 
 }

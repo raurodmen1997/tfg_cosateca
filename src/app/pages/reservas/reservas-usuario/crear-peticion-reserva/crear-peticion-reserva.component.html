@@ -1,0 +1,139 @@
+<div class="container animated fadeInLeft">
+
+  <div class="row">
+    <div class="col-12">
+      <h1>Realizar petición de reserva</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+
+        <div class="col-6">
+          <app-herramienta *ngIf="objeto" [objeto]="objeto" [pagina]="pagina"></app-herramienta>
+        </div>
+
+        <div class="col-6"> 
+
+            <div class="row">
+              <div class="col-12">
+
+                <mat-form-field appearance="legacy">
+
+                  <mat-label>Elegir rango de fechas</mat-label>
+                
+                  <mat-date-range-input [rangePicker]="picker" [formGroup]="form">
+                    <input matStartDate formControlName="fecha_inicio_reserva" placeholder="Fecha inicio">
+                    <input matEndDate formControlName="fecha_fin_reserva" placeholder="Fecha fin">
+                  </mat-date-range-input>
+                
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+                  <mat-error *ngIf="form.controls.fecha_inicio_reserva.hasError('matStartDateInvalid')">Fecha inicio inválida</mat-error>
+                  <mat-error *ngIf="form.controls.fecha_fin_reserva.hasError('matEndDateInvalid')">Fecha fin inválida</mat-error>
+  
+                </mat-form-field>
+
+              </div>
+            </div>
+            
+            <div class="row mb-2">
+              <div class="col-12">
+
+                <button *ngIf="authService.hasRole('ROLE_USER')" class="btn btn-primary mt-2" [disabled]="form.invalid" type="button" (click) = "realizarReserva()">
+                  Reservar
+                </button>
+
+              </div>
+            </div>
+<!--
+
+              <div *ngIf="peticionesReservaObjeto.length != 0" class="row">
+                <h3>Fechas no disponibles</h3>
+              </div>
+
+              <div *ngIf="peticionesReservaObjeto.length != 0" class="row">
+
+                <ul class="list-group" style="overflow-y: scroll; height: 200px;">
+                  <li *ngFor="let peticion of peticionesReservaObjeto" class="list-group-item">{{peticion.fecha_inicio_reserva | date: 'dd/MM/yyyy'}} - {{peticion.fecha_fin_reserva | date: 'dd/MM/yyyy'}}</li>
+                </ul>
+
+              </div>
+              -->
+
+              <div *ngIf="events.length == 0" class="row">
+                <p class="col-12">Aún no se han realizado reservas para esta herramienta.</p>
+              </div>
+
+              <div *ngIf="events.length != 0" class="row">
+                <!--<div class="col-12">-->
+
+                  <!--<div class="text-center">-->
+                    <div class="col-md-6">
+                      <div class="btn-group">
+
+                        <div
+                          class="btn btn-primary"
+                          mwlCalendarPreviousView
+                          [view]="view"
+                          [(viewDate)]="viewDate"
+                        >
+                          Anterior
+                        </div>
+
+                        <div
+                          class="btn btn-outline-secondary"
+                          mwlCalendarToday
+                          [(viewDate)]="viewDate"
+                        >
+                          Hoy
+                        </div>
+
+                        <div
+                          class="btn btn-primary"
+                          mwlCalendarNextView
+                          [view]="view"
+                          [(viewDate)]="viewDate"
+                        >
+                          Siguiente
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'Es' }}</h3>
+                    </div>
+
+                  <!--</div>-->
+
+                <!--</div>-->
+              </div>
+
+              <div *ngIf="events.length != 0" class="row">
+                <div class="col-12">
+
+                  <div>
+                    <mwl-calendar-month-view
+                      [viewDate]="viewDate"
+                      [events]="events"
+                      locale = "es"
+                    >
+                    </mwl-calendar-month-view>
+                  </div>
+
+                </div>
+              </div>
+              
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('detalle-objeto', objeto.id)">
+    Volver
+  </button>
+</div>

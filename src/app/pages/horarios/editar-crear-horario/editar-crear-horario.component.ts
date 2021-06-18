@@ -1,7 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ComunService, HorarioService } from 'src/app/services/services.index';
+import { ComunService, HorarioService, ValidacionesService } from 'src/app/services/services.index';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,12 +25,15 @@ export class EditarCrearHorarioComponent implements OnInit, DoCheck {
     private horarioService: HorarioService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public comunService:ComunService) { 
+    public comunService:ComunService,
+    private validacionesService:ValidacionesService) { 
 
       this.form = this.fb.group({
         dia: new FormControl('', Validators.required),
         hora_apertura: new FormControl('', Validators.required),
         hora_cierre: new FormControl('', Validators.required)
+      },{
+        validators:[ this.validacionesService.validarFechas('hora_apertura', 'hora_cierre')]
       });
       
     }
@@ -80,6 +83,7 @@ export class EditarCrearHorarioComponent implements OnInit, DoCheck {
     Swal.fire({
       title: `${title}`,
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Si`,
       cancelButtonColor: '#d33',
       icon: 'warning'

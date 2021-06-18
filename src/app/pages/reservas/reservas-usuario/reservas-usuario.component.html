@@ -1,1 +1,51 @@
-<p>reservas-usuario works!</p>
+<div class="container animated fadeInLeft">
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Peticiones de reserva</h1>
+        </div>
+    </div>
+
+    <div *ngIf="peticionesReserva.length == 0" class="row">
+      <p class="col-12">Aún no ha realizado ninguna petición de reserva.</p>
+    </div>
+
+    <div *ngIf="peticionesReserva.length != 0" class="row">
+        <div class="col-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Fecha recogida</th>
+                    <th scope="col">Fecha entrega</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let peticion of peticionesReserva">
+                    <td>{{peticion.objeto.nombre}}</td>
+                    <td>{{peticion.objeto.descripcion}}</td>
+                    <td>{{peticion.objeto.categoria}}</td>
+                    <td>{{peticion.fecha_inicio_reserva | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{peticion.fecha_fin_reserva | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{peticion.estado}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click) = "verImagen(peticion)">Ver imagen</button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <paginator-nav *ngIf="paginador" [url] = "url" [paginador]="paginador"></paginator-nav>
+
+    <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
+      Volver
+    </button>
+    
+
+</div>

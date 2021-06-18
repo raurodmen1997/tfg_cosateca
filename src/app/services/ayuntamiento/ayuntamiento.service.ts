@@ -4,6 +4,7 @@ import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import swal from 'sweetalert2';
+import { TokenService } from '../token/token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AyuntamientoService {
     'Content-Type': 'application/json'
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenService:TokenService) { }
 
 
   obtenerInfoAyuntamiento(){
@@ -31,6 +32,23 @@ export class AyuntamientoService {
       })
     )
   
+  }
+
+
+  actualizarAyuntamiento(ayuntamiento_id: number, ayuntamiento:any){
+    return this.http.put(`${this.urlEndPoint}/${ayuntamiento_id}`, ayuntamiento, {headers: this.tokenService.agregarAutorizacionToken()}).pipe(
+      map(response => response as any),
+      catchError(e =>{
+
+        if (this.tokenService.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
+        console.error(e.error.error);
+        swal.fire('Error al actualizar el ayuntamiento.', `${e.error.mensaje}`, 'error');
+        return throwError(e);
+      })
+    );
   }
 
 }

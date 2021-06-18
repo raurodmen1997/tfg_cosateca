@@ -15,6 +15,12 @@ export class RoleGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      console.log(route);
+      
+      if(route.data.titulo !== "Reservas"){
+        sessionStorage.removeItem('peticiones_reserva_usuario');
+        sessionStorage.removeItem('codigo_identificacion_busqueda');
+      }
       if (!this.authService.isAuthenticated()) {
         this.router.navigate(['/login']);
         return false;

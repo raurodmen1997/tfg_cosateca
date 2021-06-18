@@ -54,6 +54,7 @@ export class UsuariosOlvidadosComponent implements OnInit {
     Swal.fire({
       title: `¿Está seguro de querer eliminar el usuario '${usuario.nombre}'?`,
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Eliminar`,
       cancelButtonColor: '#d33',
       icon: 'warning'

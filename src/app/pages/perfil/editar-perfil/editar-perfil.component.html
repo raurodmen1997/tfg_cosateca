@@ -1,5 +1,5 @@
 <div class="container animated fadeInLeft">
-  <div class="row mb-3">
+  <div class="row">
     <div class="col-12">
       <h2>Editar datos del usuario</h2>
     </div>
@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-12">
       <form [formGroup]="form" (ngSubmit)="onSubmit()" id="form">
-        <div class="row">
+        <div *ngIf="authService.hasRole('ROLE_USER')" class="row">
           <div class="col-2">
             <div class="form-group">
               <label>Nombre</label>
@@ -15,10 +15,15 @@
                 type="text"
                 placeholder="Introduzca su nombre"
                 class="form-control"
+                [ngClass]="{'is-invalid': form.get('nombre')?.touched && form.get('nombre')?.invalid}"
                 formControlName="nombre"
               />
+              <div class="invalid-feedback" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.hasError('required')">
+                Es requerido.
+              </div>
             </div>
           </div>
+
           <div class="col-2">
             <div class="form-group">
               <label>Nombre de usuario</label>
@@ -26,10 +31,15 @@
                 type="text"
                 placeholder="Introduzca su usuario"
                 class="form-control"
+                [ngClass]="{'is-invalid': form.get('nombre_perfil')?.touched && form.get('nombre_perfil')?.invalid}"
                 formControlName="nombre_perfil"
               />
+              <div class="invalid-feedback" *ngIf="form.get('nombre_perfil')?.touched && form.get('nombre_perfil')?.hasError('required')">
+                Es requerido.
+              </div>
             </div>
           </div>
+
           <div class="col-3">
             <div class="form-group">
               <label>Primer apellido</label>
@@ -37,10 +47,15 @@
                 type="text"
                 placeholder="Introduzca su primer apellido"
                 class="form-control"
+                [ngClass]="{'is-invalid': form.get('primer_apellido')?.touched && form.get('primer_apellido')?.invalid}"
                 formControlName="primer_apellido"
               />
+              <div class="invalid-feedback" *ngIf="form.get('primer_apellido')?.touched && form.get('primer_apellido')?.hasError('required')">
+                Es requerido.
+              </div>
             </div>
           </div>
+
           <div class="col-3">
             <div class="form-group">
               <label>Segundo apellido</label>
@@ -48,34 +63,53 @@
                 type="text"
                 placeholder="Introduzca su segundo apellido"
                 class="form-control"
+                [ngClass]="{'is-invalid': form.get('segundo_apellido')?.touched && form.get('segundo_apellido')?.invalid}"
                 formControlName="segundo_apellido"
               />
+              <div class="invalid-feedback" *ngIf="form.get('segundo_apellido')?.touched && form.get('segundo_apellido')?.hasError('required')">
+                Es requerido.
+              </div>
             </div>
           </div>
+
           <div class="col-2">
             <div class="form-group">
               <label>Código postal</label>
               <input
-                type="number"
+                type="text"
                 class="form-control"
+                [ngClass]="{'is-invalid': form.get('codigo_postal')?.touched && form.get('codigo_postal')?.invalid}"
                 formControlName="codigo_postal"
               />
+              <div class="invalid-feedback" *ngIf="form.get('codigo_postal')?.touched && form.get('codigo_postal')?.hasError('required')">
+                Es requerido.
+              </div>
+              <div class="invalid-feedback" *ngIf="form.get('codigo_postal')?.touched && form.get('codigo_postal')?.hasError('pattern')">
+                Debe tener 5 dígitos.
+              </div>
+              <div class="invalid-feedback" *ngIf="form?.hasError('noContieneCodigo')">
+                Código postal no soportado.
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="row">
+        <div *ngIf="authService.hasRole('ROLE_USER')" class="row">
           <div class="col-3">
             <div class="form-group">
               <label>Tipo identificación</label>
               <select
                 class="form-control"
+                [ngClass]="{'is-invalid': form.get('tipo_identificacion')?.touched && form.get('tipo_identificacion')?.invalid}"
                 formControlName="tipo_identificacion"
               >
                 <option value="NIF">NIF</option>
                 <option value="NIE">NIE</option>
                 <!--<option *ngFor="let valor of universidades" [value]="valor.nombre">{{valor.nombre}}</option>-->
               </select>
+              <div class="invalid-feedback" *ngIf="form.get('tipo_identificacion')?.touched && form.get('tipo_identificacion')?.hasError('required')">
+                Es requerido.
+              </div>
             </div>
           </div>
 
@@ -85,10 +119,15 @@
               <input
                 type="text"
                 class="form-control"
+                [ngClass]="{'is-invalid': form.get('codigo_identificacion')?.touched && form.get('codigo_identificacion')?.invalid}"
                 formControlName="codigo_identificacion"
               />
+              <div class="invalid-feedback" *ngIf="form.get('codigo_identificacion')?.touched && form.get('codigo_identificacion')?.hasError('required')">
+                Es requerido.
+              </div>
             </div>
           </div>
+
           <div class="col-3">
             <div class="form-group">
               <label>Teléfono</label>
@@ -96,10 +135,15 @@
                 type="text"
                 placeholder="Introduzca su teléfono"
                 class="form-control"
+                [ngClass]="{'is-invalid': form.get('telefono')?.touched && form.get('telefono')?.invalid}"
                 formControlName="telefono"
               />
+              <div class="invalid-feedback" *ngIf="form.get('telefono')?.touched && form.get('telefono')?.hasError('required')">
+                Es requerido.
+              </div>
             </div>
           </div>
+
           <div class="col-3">
             <div class="form-group">
               <label>Email</label>
@@ -107,11 +151,112 @@
                 type="text"
                 placeholder="Introduzca su email"
                 class="form-control"
+                [ngClass]="{'is-invalid': form.get('direccion_email')?.touched && form.get('direccion_email')?.invalid}"
                 formControlName="direccion_email"
               />
+              <div class="invalid-feedback" *ngIf="form.get('direccion_email')?.touched && form.get('direccion_email')?.hasError('required')">
+                Es requerido.
+              </div>
+               <div class="invalid-feedback" *ngIf="form.get('direccion_email')?.touched && form.get('direccion_email')?.hasError('pattern')">
+                  Debe tener un formato válido.
+                </div>
             </div>
           </div>
         </div>
+
+        <div *ngIf="authService.hasRole('ROLE_ADMIN')" class="row">
+
+          <div class="col-4">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input
+                type="text"
+                placeholder="Introduzca su nombre"
+                class="form-control"
+                [ngClass]="{'is-invalid': form.get('nombre')?.touched && form.get('nombre')?.invalid}"
+                formControlName="nombre"
+              />
+              <div class="invalid-feedback" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.hasError('required')">
+                Es requerido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-group">
+              <label>Nombre de usuario</label>
+              <input
+                type="text"
+                placeholder="Introduzca su usuario"
+                class="form-control"
+                [ngClass]="{'is-invalid': form.get('nombre_perfil')?.touched && form.get('nombre_perfil')?.invalid}"
+                formControlName="nombre_perfil"
+              />
+              <div class="invalid-feedback" *ngIf="form.get('nombre_perfil')?.touched && form.get('nombre_perfil')?.hasError('required')">
+                Es requerido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="form-group">
+              <label>Teléfono</label>
+              <input
+                type="text"
+                placeholder="Introduzca su teléfono"
+                class="form-control"
+                [ngClass]="{'is-invalid': form.get('telefono')?.touched && form.get('telefono')?.invalid}"
+                formControlName="telefono"
+              />
+              <div class="invalid-feedback" *ngIf="form.get('telefono')?.touched && form.get('telefono')?.hasError('required')">
+                Es requerido.
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+          <div *ngIf="authService.hasRole('ROLE_ADMIN')" class="row">
+
+          <div class="col-6">
+              <div class="form-group">
+                <label>Dirección</label>
+                <input
+                  type="text"
+                  placeholder="Introduzca la dirección"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': form.get('direccion')?.touched && form.get('direccion')?.invalid}"
+                  formControlName="direccion"
+                />
+                <div class="invalid-feedback" *ngIf="form.get('direccion')?.touched && form.get('direccion')?.hasError('required')">
+                  Es requerido.
+                </div>
+              </div>
+          </div>
+
+          <div class="col-6">
+              <div class="form-group">
+                <label>Email</label>
+                <input
+                  type="text"
+                  placeholder="Introduzca su email"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': form.get('direccion_email')?.touched && form.get('direccion_email')?.invalid}"
+                  formControlName="direccion_email"
+                />
+                <div class="invalid-feedback" *ngIf="form.get('direccion_email')?.touched && form.get('direccion_email')?.hasError('required')">
+                  Es requerido.
+                </div>
+                  <div class="invalid-feedback" *ngIf="form.get('direccion_email')?.touched && form.get('direccion_email')?.hasError('pattern')">
+                    Debe tener un formato válido.
+                  </div>
+              </div>
+          </div>
+
+        </div>
+          
+          
+        
 
         <!--
           <div class="col-4">

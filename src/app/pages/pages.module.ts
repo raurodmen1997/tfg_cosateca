@@ -32,6 +32,26 @@ import { ReservasUsuarioComponent } from './reservas/reservas-usuario/reservas-u
 import { ReservasAdminComponent } from './reservas/reservas-admin/reservas-admin.component';
 import { UsuariosOlvidadosComponent } from './usuarios-olvidados/usuarios-olvidados.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { CrearPeticionReservaComponent } from './reservas/reservas-usuario/crear-peticion-reserva/crear-peticion-reserva.component';
+import { CrearValoracionComponent } from './valoraciones/crear-valoracion/crear-valoracion.component';
+import { TycComponent } from './tyc/tyc.component';
+import { PoliticaPrivacidadComponent } from './politica-privacidad/politica-privacidad.component';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+
 
 
 
@@ -59,7 +79,11 @@ import { InicioComponent } from './inicio/inicio.component';
         ReservasUsuarioComponent,
         ReservasAdminComponent,
         UsuariosOlvidadosComponent,
-        InicioComponent
+        InicioComponent,
+        CrearPeticionReservaComponent,
+        CrearValoracionComponent,
+        TycComponent,
+        PoliticaPrivacidadComponent
     ],
     exports: [
         CommonModule
@@ -71,8 +95,15 @@ import { InicioComponent } from './inicio/inicio.component';
         ReactiveFormsModule,
         CommonModule,
         BrowserModule,
-        RatingModule
-       
+        RatingModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        NgbModalModule,
+        FlatpickrModule.forRoot(),
+        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
     ]
 })
 export class PagesModule { }

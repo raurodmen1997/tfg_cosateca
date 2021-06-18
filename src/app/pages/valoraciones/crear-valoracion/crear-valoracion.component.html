@@ -1,0 +1,61 @@
+<div class="container animated fadeInLeft">
+
+    <div class="row">
+        <div class="col-12">
+          <h1>Nueva valoración</h1>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+
+                    <div class="col-10">
+
+                        <div class="form-group">
+
+                            <label>Comentario</label>   
+                            <textarea class="form-control"  
+                            [ngClass]="{'is-invalid': form.get('comentario')?.touched && form.get('comentario')?.invalid}"
+                            rows="3" formControlName="comentario"></textarea>
+                            <div class="invalid-feedback" *ngIf="form.get('comentario')?.touched && form.get('comentario')?.hasError('required')">
+                                Es requerido.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-2">
+                        <label>Puntuación</label> 
+                        <input class="form-control"
+                        [ngClass]="{'is-invalid': form.get('puntuacion')?.touched && form.get('puntuacion')?.invalid}" 
+                        type="number" step="any" formControlName="puntuacion">
+                        <div class="invalid-feedback" *ngIf="form.get('puntuacion')?.touched && form.get('puntuacion')?.hasError('required')">
+                            Es requerido.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="form.get('puntuacion')?.touched && (form.get('puntuacion')?.hasError('min') || form.get('puntuacion')?.hasError('max'))">
+                            Debe estar entre 0 y 5.
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <button class="btn btn-primary mr-2" [disabled]="form.invalid">
+                    Guardar
+                </button>
+                <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('detalle-objeto', objeto.id)">
+                    Cancelar
+                </button>
+  
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

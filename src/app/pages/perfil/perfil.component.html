@@ -63,7 +63,8 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Datos del usuario</h5>
+          <h4 *ngIf="authService.hasRole('ROLE_USER')">Datos del usuario</h4>
+          <h4 *ngIf="authService.hasRole('ROLE_ADMIN')">Datos del ayuntamiento</h4>
           <button (click) = "cerralModal()" type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -73,7 +74,7 @@
           <div class="row">
             
             <div class="col-7">
-              <ul class="list-group">
+              <ul *ngIf="authService.hasRole('ROLE_USER')" class="list-group">
                 <li class="list-group-item"><strong>Nombre:</strong> {{ usuario.nombre }}</li>
                 <li class="list-group-item">
                   <strong>Apellidos:</strong> {{ usuario.primer_apellido }}
@@ -87,10 +88,24 @@
                 </li>
                 
               </ul>
+
+              <ul *ngIf="authService.hasRole('ROLE_ADMIN')" class="list-group">
+                <li class="list-group-item"><strong>Nombre:</strong> {{ usuario.nombre }}</li>
+                <li class="list-group-item">
+                  <strong>Municipio:</strong> {{ usuario.municipio }}
+                </li>
+                <li class="list-group-item">
+                  <strong>Provincia:</strong> {{ usuario.provincia }}
+                </li>
+                <li class="list-group-item">
+                  <strong>Dirección:</strong> {{ usuario.direccion }}
+                </li>
+                
+              </ul>
             </div>
 
             <div class="col-5">
-              <ul class="list-group">
+              <ul *ngIf="authService.hasRole('ROLE_USER')" class="list-group">
                 <li class="list-group-item">
                   <strong>Teléfono:</strong> {{ usuario.telefono }}
                 </li>
@@ -102,6 +117,21 @@
                 </li>
                 <li class="list-group-item">
                   <strong>Tipo de identificación:</strong> {{ usuario.tipo_identificacion }}
+                </li>
+              </ul>
+
+              <ul *ngIf="authService.hasRole('ROLE_ADMIN')" class="list-group">
+                <li class="list-group-item">
+                  <strong>Teléfono:</strong> {{ usuario.telefono }}
+                </li>
+                <li class="list-group-item">
+                  <strong>Dirección de correo:</strong> {{ usuario.direccion_email }}
+                </li>  
+                <li class="list-group-item">
+                  <strong>Códigos postales:</strong> {{ usuario.codigo_postal }}
+                </li>
+                <li class="list-group-item">
+                  <strong>Nombre de perfil:</strong> {{ usuario.username }}
                 </li>
               </ul>
             </div>

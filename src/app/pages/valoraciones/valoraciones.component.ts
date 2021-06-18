@@ -27,6 +27,7 @@ export class ValoracionesComponent implements OnInit {
     Swal.fire({
       title: '¿Está seguro de querer eliminar la valoración seleccionada?',
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: `Si`,
       cancelButtonColor: '#d33',
       icon: 'warning',

@@ -11,9 +11,19 @@ export class AuthService {
   
   private _usuario: any;
   private _token: any;
+  private _codigo: any;
 
   constructor(private http: HttpClient) { }
 
+  public get codigo(): any {
+    if (this._codigo != null) {
+      return this._codigo;
+    } else if (this._codigo == null && sessionStorage.getItem('codigo_postal') != null) {
+      this._codigo = sessionStorage.getItem('codigo_postal') as String;
+      return this._codigo;
+    }
+    return null;
+  }
 
   public get usuario(): Usuario {
     if (this._usuario != null) {
@@ -72,9 +82,20 @@ export class AuthService {
     this._usuario.tipo_identificacion = payload.tipo_identificacion;
     this._usuario.olvidado = payload?.olvidado;
     this._usuario.id_cuenta = payload.id_cuenta;
+    this._usuario.municipio = payload?.municipio;
+    this._usuario.provincia = payload?.provincia;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
+  guardarToken(accessToken: string): void {
+    this._token = accessToken;
+    sessionStorage.setItem('token', accessToken);
+  }
+
+
+
+
+  
   actualizarUsuario(usuario:any){
     this._usuario = new Usuario();
     this._usuario.nombre = usuario.nombre;
@@ -83,7 +104,7 @@ export class AuthService {
     this._usuario.username = usuario.cuenta.nombre_perfil;
     this._usuario.telefono = usuario?.telefono;
     this._usuario.direccion_email = usuario?.direccion_email;
-    this._usuario.direccion = usuario?.direcion;
+    this._usuario.direccion = usuario?.direccion;
     this._usuario.id = usuario.id;
     this._usuario.roles = usuario.cuenta.autoridad;
     this._usuario.codigo_postal = usuario.codigo_postal;
@@ -91,12 +112,16 @@ export class AuthService {
     this._usuario.tipo_identificacion = usuario.tipo_identificacion;
     this._usuario.olvidado = usuario?.olvidado;
     this._usuario.id_cuenta = usuario.cuenta.id;
+    this._usuario.municipio = usuario?.municipio;
+    this._usuario.provincia = usuario?.provincia;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
-  guardarToken(accessToken: string): void {
-    this._token = accessToken;
-    sessionStorage.setItem('token', accessToken);
+  
+
+  guardarCodigosPostales(codigo_postal: string): void {
+    this._codigo = codigo_postal;
+    sessionStorage.setItem('codigo_postal', codigo_postal);
   }
 
   obtenerDatosToken(accessToken: string): any {

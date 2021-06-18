@@ -1,1 +1,76 @@
-<p>reservas-admin works!</p>
+<div class="container animated fadeInLeft">
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Peticiones de reserva</h1>
+        </div>
+    </div>
+
+    <div *ngIf="peticionesReserva.length == 0" class="row">
+      <p class="col-12">Aún no hay peticiones de reserva en el sistema.</p>
+    </div>
+
+    <div *ngIf="peticionesReserva.length != 0" class="row">
+      <div class="col-4">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+
+            <label>Usuario</label>
+            <div class="input-group">
+              <input type="text" class="form-control"
+              formControlName="codigo_identificacion">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" [disabled]="form.get('codigo_identificacion')?.value == '' || form.get('codigo_identificacion')?.value == null" type="submit"><i class="fas fa-search"></i></button>
+                <button class="btn btn-outline-secondary" [disabled]="form.get('codigo_identificacion')?.value == '' || form.get('codigo_identificacion')?.value == null" (click) = "limpiarForm()" type="button"><i class="fas fa-times"></i></button>
+              </div>
+            </div>
+            
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div *ngIf="peticionesReserva.length != 0" class="row">
+        <div class="col-12">
+            <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Fecha recogida</th>
+                    <th scope="col">Fecha entrega</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let peticion of peticionesReserva">
+                    <td>{{peticion.objeto.nombre}}</td>
+                    <td>{{peticion.usuario.codigo_identificacion}}</td>
+                    <td>{{peticion.fecha_inicio_reserva | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{peticion.fecha_fin_reserva | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{peticion.estado}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click) = "verImagen(peticion)">Ver imagen</button>
+                    </td>
+                    <td>
+                      <button *ngIf="peticion.estado == 'EN_PROCESO_DE_RECOGIDA'" type="button" class="btn btn-primary" (click) = "entregarHerramienta(peticion)">Entregar</button>
+                      <button *ngIf="peticion.estado == 'EN_PROPIEDAD'" type="button" class="btn btn-primary" (click) = "finalizarReserva(peticion)">Finalizar</button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <paginator-nav *ngIf="paginador && peticionesReserva.length != 0" [url] = "url" [paginador]="paginador"></paginator-nav>
+
+    <button class="btn btn-danger" type="button" (click) = "comunService.ir_a('inicio', null!)">
+      Volver
+    </button>
+    
+
+</div>
